@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.container {
+  cursor: pointer;
+  padding: 20px;
+  height: 400px;
+  width: 400px;
+  font-size: 20px;
+  border: solid 2px black;
+  border-radius: 10px;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  word-wrap: break-word;
+}
+
+.userName {
+  font-size: 20px;
+}
+.title {
+  font-size: 50px;
+  text-align: center;
+}
+.starsCont {
+  position: absolute;
+  bottom: 10px;
+  left: 30px;
+  display: flex;
+  flex-direction: row;
+}
+.star {
+  font-size: 20px;
+  color: rgb(226, 96, 35);
+}
+.userPostImg {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: solid 3px black;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+.userPostContainer {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.postImg {
+  width: 100%;
+  height: 200px;
+}
+
+@media (min-width: 1560px) {
+  .container {
+    cursor: pointer;
+    padding: 20px;
+    height: 400px;
+    width: 350px;
+    font-size: 20px;
+    border: solid 2px black;
+    border-radius: 10px;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    word-wrap: break-word;
+  }
+  .title {
+    margin-top: 10px;
+    font-size: 35px;
+    text-align: center;
+  }
+}

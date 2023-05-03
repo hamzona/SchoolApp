@@ -1,0 +1,24 @@
+.container {
+  background-color: rgb(201, 202, 202);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.selectSort {
+  margin: 10px;
+  width: 100px;
+  height: 30px;
+  font-size: 15px;
+}
+.submitButton {
+  margin: 20px;
+  width: 100px;
+  height: 30px;
+}
+.title {
+  font-size: 30px;
+}

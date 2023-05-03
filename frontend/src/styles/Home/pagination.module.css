@@ -1,0 +1,14 @@
+.container {
+  margin-bottom: 100px;
+}
+
+.nextPrev {
+  font-size: 30px;
+  margin: 30px;
+}
+
+.numbers {
+  font-size: 25px;
+  margin: 10px;
+  padding: 10px;
+}
