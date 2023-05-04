@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomePostsCss from "../../styles/Home/homePosts.module.css";
 import useSinglePostContext from "../../hooks/useSinglePostContext";
 import DatePost from "./DatePost";
@@ -19,9 +19,14 @@ export default function HomePosts({ item }) {
     backgroundSize: `cover`,
     backgroundRepeat: "no-repeat",
   };
+  const [urlPost, setUrlPost] = useState(noPostImg);
 
-  const urlPost =
-    Array.from(item.postImgs).length === 0 ? noPostImg : item.postUrls[0];
+  useEffect(() => {
+    setUrlPost(
+      Array.from(item.postImgs).length === 0 ? noPostImg : item.postUrls[0]
+    );
+  }, [item]);
+
   const imgPostStyles = {
     backgroundImage: "url(" + urlPost + ")",
     backgroundPosition: "center",

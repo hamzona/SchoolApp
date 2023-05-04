@@ -22,7 +22,6 @@ export default function SinglePost() {
     backgroundSize: `cover`,
     backgroundRepeat: "no-repeat",
   };
-  console.log(singlePost);
   const PostImgURL =
     Array.from(singlePost.postUrls).length === 0
       ? noPostImg

@@ -56,6 +56,7 @@ export function PostContextProvider({ children }) {
     subjects.forEach((subject) => {
       params.append("subject", subject);
     });
+
     const getAllPosts = async () => {
       setIsLoadingPosts(true);
       const res = await fetch(
@@ -63,7 +64,6 @@ export function PostContextProvider({ children }) {
       );
       const json = await res.json();
 
-      console.log(json);
       let finalResponse;
       if (res.ok) {
         finalResponse = await Promise.all(
@@ -81,25 +81,37 @@ export function PostContextProvider({ children }) {
             return imageObj;
           })
         );
+        /*finalResponse=await Promise.all(
+json.data.map(async(post)=>{
+  post.postUrls = [];
+  if (!post.postImgs || post.postImgs.length === 0) return post;
 
-        finalResponse.forEach(async (post) => {
-          if (!post.postImgs || post.postImgs.length === 0) return post;
-          post.postUrls = [];
 
-          post.postImgs.forEach(async (postImg) => {
-            const img = await fetch(
-              `http://localhost:4000/api/img/getImgPublic/${postImg}`
+  
+})*/
+        finalResponse = await Promise.all(
+          finalResponse.map(async (post) => {
+            if (!post.postImgs || post.postImgs.length === 0) return post;
+
+            post.postUrls = [];
+            let copyPost = post;
+
+            let images = await Promise.all(
+              post.postImgs.map(async (postImg) => {
+                const img = await fetch(
+                  `http://localhost:4000/api/img/getImgPublic/${postImg}`
+                );
+
+                const blob = await img.blob();
+                const imgURL = URL.createObjectURL(blob);
+                return imgURL;
+              })
             );
-
-            const blob = await img.blob();
-            const imgURL = URL.createObjectURL(blob);
-            await post.postUrls.push(imgURL);
-          });
-        });
-
-        console.log(finalResponse);
+            copyPost.postUrls = images;
+            return copyPost;
+          })
+        );
       }
-
       if (res.ok) {
         setPages(json.pages);
         dispatch({ type: "setPosts", payload: finalResponse });
@@ -113,6 +125,7 @@ export function PostContextProvider({ children }) {
     };
     getAllPosts();
   }, [page, search, subjects, minPrice, maxPrice, jobType, sortBy]);
+
   return (
     <PostContext.Provider
       value={{

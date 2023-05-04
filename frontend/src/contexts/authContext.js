@@ -21,8 +21,7 @@ export function AuthContextProvider({ children }) {
       if (!user) {
         return;
       }
-      console.log("now time" + new Date().getTime());
-      console.log(user.expDate);
+
       if (new Date().getTime() > user.expDate) {
         localStorage.removeItem("user");
         return;
