@@ -1,13 +1,13 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  max-width: 100%;
 }
+
 body {
   margin: 0;
   padding: 0;
-  max-width: 100%;
   height: 100%;
+  box-sizing: border-box;
+
   overflow-x: hidden;
 }
 
@@ -16,10 +16,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 100%;
-  /* background-color: rgb(56, 66, 124);
-*/
+  background-color: rgb(56, 66, 124);
 }
 .homeNav {
   position: fixed;
@@ -47,12 +46,14 @@ body {
 }
 
 .posts {
-  height: 100%;
-  margin: 100px;
+  background-color: aquamarine;
+
+  width: 85%;
+
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(auto-fill, minmax(20%, 30%));
+
   grid-gap: 46px;
-  padding: 40px;
 }
 
 .profilLink {
@@ -108,15 +109,4 @@ body {
   display: flex;
   align-items: center;
   width: 400px;
-}
-
-@media only screen and (min-width: 1560px) {
-  .posts {
-    height: 100%;
-    margin: 100px;
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: 20px;
-    padding: 20px;
-  }
 }

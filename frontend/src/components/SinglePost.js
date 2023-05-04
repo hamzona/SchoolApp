@@ -67,8 +67,7 @@ export default function SinglePost() {
           )}
         </div>
         <div className={SinglePostCss.postImgContainer}>
-          {!singlePost ? null : (Array.from(singlePost.postImgs).length ===
-              0) ===
+          {!singlePost ? null : Array.from(singlePost.postImgs).length ===
             0 ? null : (
             <button
               className={SinglePostCss.postImgButton}

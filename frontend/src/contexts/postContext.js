@@ -91,9 +91,9 @@ json.data.map(async(post)=>{
 })*/
         finalResponse = await Promise.all(
           finalResponse.map(async (post) => {
+            post.postUrls = [];
             if (!post.postImgs || post.postImgs.length === 0) return post;
 
-            post.postUrls = [];
             let copyPost = post;
 
             let images = await Promise.all(
