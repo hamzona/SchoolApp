@@ -68,7 +68,6 @@ export default function Input() {
         }
       );
       var jsonWithImgs = await resWithImgs.json();
-      console.log(jsonWithImgs);
     }
 
     if (res.ok) {
@@ -104,7 +103,6 @@ export default function Input() {
       };
     }
   }
-  console.log(Array.from(images));
   return (
     <div className={InputCss.container}>
       <Link className={InputCss.back} to="/profil">

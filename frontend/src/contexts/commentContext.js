@@ -1,6 +1,5 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import useSinglePostContext from "../hooks/useSinglePostContext";
-import { useAuthContext } from "../hooks/useAuthContext";
 export const CommentContext = createContext();
 function updateReducer(state, action) {
   switch (action.type) {
@@ -18,10 +17,11 @@ function updateReducer(state, action) {
 export function CommentContextProvider({ children }) {
   const [comments, dispatch] = useReducer(updateReducer, []);
   const { singlePost } = useSinglePostContext();
-  const { state } = useAuthContext();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (singlePost === null) return;
     async function getData() {
+      setLoading(true);
       const res = await fetch(" http://localhost:4000/api/comments/all    ", {
         method: "POST",
         headers: {
@@ -30,7 +30,6 @@ export function CommentContextProvider({ children }) {
         body: JSON.stringify({ postId: singlePost._id }),
       });
       const json = await res.json();
-      console.log(json);
       const commentsWithImg = await Promise.all(
         json.map(async (comment) => {
           if (!comment.imgName) return comment;
@@ -46,9 +45,9 @@ export function CommentContextProvider({ children }) {
           return imageObj;
         })
       );
-      console.log(commentsWithImg);
       if (res.ok) {
         dispatch({ type: "setComments", payload: commentsWithImg });
+        setLoading(false);
       }
     }
     getData();
@@ -56,7 +55,9 @@ export function CommentContextProvider({ children }) {
 
   useEffect(() => {}, []);
   return (
-    <CommentContext.Provider value={{ comments, dispatch }}>
+    <CommentContext.Provider
+      value={{ comments, dispatch, loading, setLoading }}
+    >
       {children}
     </CommentContext.Provider>
   );

@@ -38,7 +38,6 @@ const postComment = async (req, res, next) => {
     const l = rates.length === 0 ? 1 : rates.length;
     sum = sum / l;
     sum.toFixed(2);
-    console.log(sum);
     var postRate = await Post.findOneAndUpdate(
       {
         _id: postId,
