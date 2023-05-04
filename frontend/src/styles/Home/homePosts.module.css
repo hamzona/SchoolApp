@@ -28,10 +28,10 @@ body {
 }
 
 .userName {
-  font-size: clamp(0.45rem, 1.5vw, 2rem);
+  font-size: clamp(1rem, 1.5vw, 2rem);
 }
 .title {
-  font-size: clamp(0.75rem, 3.5vw, 2rem);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
   text-align: center;
 }
 .starsCont {

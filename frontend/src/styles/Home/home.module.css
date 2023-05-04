@@ -48,10 +48,10 @@ body {
 .posts {
   background-color: aquamarine;
 
-  width: 85%;
+  width: min-content;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20%, 30%));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 30%));
 
   grid-gap: 46px;
 }
