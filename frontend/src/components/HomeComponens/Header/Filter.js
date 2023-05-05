@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { usePostContext } from "../../hooks/usePostContext";
-import FilterCss from "../../styles/Home/filter.module.css";
-export default function Filter({ setIsFilter }) {
+import { usePostContext } from "../../../hooks/usePostContext";
+import FilterCss from "../../../styles/Home/Header/filter.module.css";
+export default function Filter({ setIsFilterOpen }) {
   const { setSubjects, setMinPrice, setMaxPrice, setJobType, setPage } =
     usePostContext();
   const [filterSubject, setFilterSubject] = useState([]);
@@ -35,7 +35,7 @@ export default function Filter({ setIsFilter }) {
     setMaxPrice(maxPriceF);
     setJobType(jobTypeF);
     setPage(1);
-    setIsFilter(false);
+    setIsFilterOpen(false);
   }
 
   function resetAll() {
@@ -50,7 +50,8 @@ export default function Filter({ setIsFilter }) {
       <div
         className={FilterCss.cancle}
         onClick={() => {
-          setIsFilter(false);
+          console.log("radi");
+          setIsFilterOpen(false);
         }}
       >
         X

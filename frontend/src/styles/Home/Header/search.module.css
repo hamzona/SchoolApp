@@ -1,0 +1,18 @@
+.container {
+  padding: 0px;
+  margin: 0px;
+  width: fit-content;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.inputTag {
+  min-height: 10px;
+  width: 30vw;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 0%;
+}
+.buttonTag {
+  margin: 0%;
+}

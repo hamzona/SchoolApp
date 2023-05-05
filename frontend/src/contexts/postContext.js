@@ -30,7 +30,7 @@ export function PostContextProvider({ children }) {
   const [error, setError] = useState(null);
 
   /*sort */
-  const [sortBy, setSortBy] = useState(null);
+  const [sortBy, setSortBy] = useState("");
 
   /*Loading */
   const [isLoadingPosts, setIsLoadingPosts] = useState(false);
@@ -97,28 +97,6 @@ export function PostContextProvider({ children }) {
             return copyPost;
           })
         );
-        // finalResponse = await Promise.all(
-        //   finalResponse.map(async (post) => {
-        //     post.postUrls = [];
-        //     if (!post.postImgs || post.postImgs.length === 0) return post;
-
-        //     let copyPost = post;
-
-        //     let images = await Promise.all(
-        //       post.postImgs.map(async (postImg) => {
-        //         const img = await fetch(
-        //           `http://localhost:4000/api/img/getImgPublic/${postImg}`
-        //         );
-
-        //         const blob = await img.blob();
-        //         const imgURL = URL.createObjectURL(blob);
-        //         return imgURL;
-        //       })
-        //     );
-        //     copyPost.postUrls = images;
-        //     return copyPost;
-        //   })
-        // );
       }
       if (res.ok) {
         setPages(json.pages);
@@ -148,8 +126,14 @@ export function PostContextProvider({ children }) {
         setMinPrice,
         setJobType,
         setSortBy,
+
+        sortBy,
+        jobType,
         error,
         isLoadingPosts,
+        subjects,
+        minPrice,
+        maxPrice,
       }}
     >
       {children}
