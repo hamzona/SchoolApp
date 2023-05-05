@@ -81,36 +81,44 @@ export function PostContextProvider({ children }) {
             return imageObj;
           })
         );
-        /*finalResponse=await Promise.all(
-json.data.map(async(post)=>{
-  post.postUrls = [];
-  if (!post.postImgs || post.postImgs.length === 0) return post;
 
-
-  
-})*/
         finalResponse = await Promise.all(
           finalResponse.map(async (post) => {
             post.postUrls = [];
+
             if (!post.postImgs || post.postImgs.length === 0) return post;
-
             let copyPost = post;
-
-            let images = await Promise.all(
-              post.postImgs.map(async (postImg) => {
-                const img = await fetch(
-                  `http://localhost:4000/api/img/getImgPublic/${postImg}`
-                );
-
-                const blob = await img.blob();
-                const imgURL = URL.createObjectURL(blob);
-                return imgURL;
-              })
+            const img = await fetch(
+              `http://localhost:4000/api/img/getImgPublic/${copyPost.postImgs[0]}`
             );
-            copyPost.postUrls = images;
+            const blob = await img.blob();
+            const imgURL = URL.createObjectURL(blob);
+            copyPost.postUrls.push(imgURL);
             return copyPost;
           })
         );
+        // finalResponse = await Promise.all(
+        //   finalResponse.map(async (post) => {
+        //     post.postUrls = [];
+        //     if (!post.postImgs || post.postImgs.length === 0) return post;
+
+        //     let copyPost = post;
+
+        //     let images = await Promise.all(
+        //       post.postImgs.map(async (postImg) => {
+        //         const img = await fetch(
+        //           `http://localhost:4000/api/img/getImgPublic/${postImg}`
+        //         );
+
+        //         const blob = await img.blob();
+        //         const imgURL = URL.createObjectURL(blob);
+        //         return imgURL;
+        //       })
+        //     );
+        //     copyPost.postUrls = images;
+        //     return copyPost;
+        //   })
+        // );
       }
       if (res.ok) {
         setPages(json.pages);

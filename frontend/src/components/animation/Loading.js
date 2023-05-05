@@ -1,17 +1,8 @@
 import React from "react";
-
+import LoadingCss from "../../styles/loading.module.css";
 export default function Loading() {
   return (
-    <div
-      style={{
-        marginTop: "300px",
-        marginBottom: "200px",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div className={LoadingCss.loadingContainer}>
       <svg
         color="blue"
         width="150"

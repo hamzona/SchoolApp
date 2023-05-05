@@ -49,10 +49,9 @@ body {
   background-color: aquamarine;
 
   width: min-content;
-
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 30%));
-
+  grid-auto-rows: max-content;
   grid-gap: 46px;
 }
 

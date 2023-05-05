@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import HomePostsCss from "../../styles/Home/homePosts.module.css";
-import useSinglePostContext from "../../hooks/useSinglePostContext";
+//import useSinglePostContext from "../../hooks/useSinglePostContext";
 import DatePost from "./DatePost";
 import noUserImg from "../../img/user-icon-linear-user-icon-gray-background-106603311.jpg";
 import noPostImg from "../../img/no-image.jpg";
-//import { useNavigate } from "react-router-dom";
+import { useFetchSinglePost } from "../../hooks/useFetchSinglePost";
+import { useNavigate } from "react-router-dom";
 export default function HomePosts({ item }) {
-  const { dispatch } = useSinglePostContext();
-  //const navigate = useNavigate();
-  function hendleClick() {
-    dispatch({ type: "setSinglePost", payload: item });
-    // navigate("/singlePost");
-  }
+  // const { dispatch } = useSinglePostContext();
+  const [fetchPostData] = useFetchSinglePost();
+  const navigate = useNavigate();
+
   const url = !item.imgURL ? noUserImg : item.imgURL;
   const imgStyles = {
     backgroundImage: "url(" + url + ")",
@@ -37,7 +36,8 @@ export default function HomePosts({ item }) {
     <div
       className={HomePostsCss.container}
       onClick={() => {
-        hendleClick();
+        navigate("/singlePost");
+        fetchPostData(item);
       }}
     >
       <div className={HomePostsCss.postImg} style={imgPostStyles}></div>
