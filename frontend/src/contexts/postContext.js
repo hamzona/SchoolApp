@@ -30,8 +30,10 @@ export function PostContextProvider({ children }) {
   const [error, setError] = useState(null);
 
   /*sort */
-  const [sortBy, setSortBy] = useState(null);
-
+  const [sortBy, setSortBy] = useState("");
+  /*posts from user */
+  // const [user, setUser] = useState(null);
+  // console.log(user);
   /*Loading */
   const [isLoadingPosts, setIsLoadingPosts] = useState(false);
   useEffect(() => {
@@ -53,6 +55,7 @@ export function PostContextProvider({ children }) {
     if (!jobType) {
       params.delete("jobType");
     }
+
     subjects.forEach((subject) => {
       params.append("subject", subject);
     });
@@ -81,33 +84,19 @@ export function PostContextProvider({ children }) {
             return imageObj;
           })
         );
-        /*finalResponse=await Promise.all(
-json.data.map(async(post)=>{
-  post.postUrls = [];
-  if (!post.postImgs || post.postImgs.length === 0) return post;
 
-
-  
-})*/
         finalResponse = await Promise.all(
           finalResponse.map(async (post) => {
-            if (!post.postImgs || post.postImgs.length === 0) return post;
-
             post.postUrls = [];
+
+            if (!post.postImgs || post.postImgs.length === 0) return post;
             let copyPost = post;
-
-            let images = await Promise.all(
-              post.postImgs.map(async (postImg) => {
-                const img = await fetch(
-                  `http://localhost:4000/api/img/getImgPublic/${postImg}`
-                );
-
-                const blob = await img.blob();
-                const imgURL = URL.createObjectURL(blob);
-                return imgURL;
-              })
+            const img = await fetch(
+              `http://localhost:4000/api/img/getImgPublic/${copyPost.postImgs[0]}`
             );
-            copyPost.postUrls = images;
+            const blob = await img.blob();
+            const imgURL = URL.createObjectURL(blob);
+            copyPost.postUrls.push(imgURL);
             return copyPost;
           })
         );
@@ -125,7 +114,6 @@ json.data.map(async(post)=>{
     };
     getAllPosts();
   }, [page, search, subjects, minPrice, maxPrice, jobType, sortBy]);
-
   return (
     <PostContext.Provider
       value={{
@@ -140,8 +128,13 @@ json.data.map(async(post)=>{
         setMinPrice,
         setJobType,
         setSortBy,
+        sortBy,
+        jobType,
         error,
         isLoadingPosts,
+        subjects,
+        minPrice,
+        maxPrice,
       }}
     >
       {children}

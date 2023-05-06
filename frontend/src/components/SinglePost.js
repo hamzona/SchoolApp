@@ -9,13 +9,13 @@ import noUserImg from "../img/user-icon-linear-user-icon-gray-background-1066033
 import noPostImg from "../img/no-image.jpg";
 
 export default function SinglePost() {
-  const { singlePost, dispatch, imgUrl } = useSinglePostContext();
+  const { singlePost, dispatch } = useSinglePostContext();
   const [imgIndex, setImgIndex] = useState(0);
   const { comments } = useCommentContext();
   function hendleClick() {
     dispatch({ type: "setSinglePost", payload: null });
   }
-  const url = !imgUrl ? noUserImg : imgUrl;
+  const url = !singlePost.profilImg ? noUserImg : singlePost.profilImg;
   const imgStyles = {
     backgroundImage: "url(" + url + ")",
     backgroundPosition: "center",
@@ -67,8 +67,7 @@ export default function SinglePost() {
           )}
         </div>
         <div className={SinglePostCss.postImgContainer}>
-          {!singlePost ? null : (Array.from(singlePost.postImgs).length ===
-              0) ===
+          {!singlePost ? null : Array.from(singlePost.postImgs).length ===
             0 ? null : (
             <button
               className={SinglePostCss.postImgButton}

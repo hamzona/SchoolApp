@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 
 export const SinglePost = createContext();
 function updateReducer(state, action) {
@@ -11,27 +11,11 @@ function updateReducer(state, action) {
 }
 export function SinglePostProvider({ children }) {
   const [singlePost, dispatch] = useReducer(updateReducer, null);
-
-  const [imgUrl, setImgUrl] = useState(null);
-
-  useEffect(() => {
-    if (singlePost !== null) {
-      if (!singlePost.imgName) return;
-    } else {
-      return;
-    }
-    async function getImg() {
-      const res = await fetch(
-        `http://localhost:4000/api/img/getImgPublic/${singlePost.imgName}`
-      );
-      const blob = await res.blob();
-      const imgURL = URL.createObjectURL(blob);
-      setImgUrl(imgURL);
-    }
-    getImg();
-  }, [singlePost]);
+  const [loadingPost, setLoadingPost] = useState(false);
   return (
-    <SinglePost.Provider value={{ singlePost, dispatch, imgUrl }}>
+    <SinglePost.Provider
+      value={{ singlePost, dispatch, setLoadingPost, loadingPost }}
+    >
       {children}
     </SinglePost.Provider>
   );

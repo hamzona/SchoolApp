@@ -1,13 +1,12 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  max-width: 100%;
 }
+
 body {
   margin: 0;
   padding: 0;
-  max-width: 100%;
   height: 100%;
+  box-sizing: border-box;
   overflow-x: hidden;
 }
 
@@ -16,12 +15,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 100%;
-  /* background-color: rgb(56, 66, 124);
-*/
 }
-.homeNav {
+/* .homeNav {
   position: fixed;
   top: 0;
   left: 0;
@@ -34,32 +31,32 @@ body {
   align-items: center;
   z-index: 2;
   border-bottom: solid black 5px;
-}
-.loginSingupCont {
+} */
+/* .loginSingupCont {
   margin-left: 50px;
   font-size: 30px;
-}
-.loginLink {
+} */
+/* .loginLink {
   text-decoration: none;
 }
 .singupLink {
   text-decoration: none;
-}
+} */
 
 .posts {
-  height: 100%;
-  margin: 100px;
+  padding: 3em 0;
+  width: min-content;
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(auto-fit, minmax(350px, 30%));
+  grid-auto-rows: max-content;
   grid-gap: 46px;
-  padding: 40px;
 }
 
-.profilLink {
+/* .profilLink {
   margin-left: 100px;
   text-decoration: none;
   font-size: 30px;
-}
+} */
 .searchBarContainer {
   margin-top: 100px;
   background-color: aqua;
@@ -75,48 +72,37 @@ body {
   padding: 20px;
   font-size: 20px;
 }
-.resetFilterBtn {
+/* .resetFilterBtn {
   width: 120px;
   height: 40px;
   position: absolute;
   left: 200px;
   top: 150px;
-}
-.filterBtn {
+} */
+/* .filterBtn {
   width: 120px;
   height: 40px;
   position: absolute;
   left: 50px;
   top: 150px;
-}
-.sortBtn {
+} */
+/* .sortBtn {
   width: 120px;
   height: 40px;
   position: absolute;
   right: 50px;
   top: 150px;
-}
+} */
 
-.profilImg {
+/* .profilImg {
   width: 75px;
   height: 75px;
   border-radius: 50%;
   margin-right: 15px;
-}
+} */
 
-.profilContainer {
+/* .profilContainer {
   display: flex;
   align-items: center;
   width: 400px;
-}
-
-@media only screen and (min-width: 1560px) {
-  .posts {
-    height: 100%;
-    margin: 100px;
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: 20px;
-    padding: 20px;
-  }
-}
+} */

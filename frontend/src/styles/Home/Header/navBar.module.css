@@ -1,0 +1,66 @@
+.container {
+  width: 100%;
+
+  box-sizing: border-box;
+  border-bottom: solid 2px black;
+}
+.profilContainer {
+  width: 7vw;
+  min-width: 100px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 2rem;
+  text-decoration: none;
+  color: black;
+}
+.profilContainer:hover {
+  background-color: rgba(0, 0, 0, 0.281);
+  z-index: 1;
+}
+
+.profilImg {
+  min-width: 3rem;
+  min-height: 3rem;
+
+  border-radius: 50%;
+}
+
+.dataTypeContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
+}
+.dataTypeOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1%;
+  font-size: 1rem;
+  width: 100%;
+}
+.dataTypeOption:hover {
+  background-color: rgba(0, 0, 0, 0.281);
+}
+.filter_search_profil_container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2em 0;
+}
+.filterBtn {
+  padding: 0.5em;
+  font-size: 1rem;
+}
+@media (width<735px) {
+  .filter_search_profil_container {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
+  }
+}

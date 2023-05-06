@@ -8,10 +8,11 @@ import { Singup } from "./components/Singup/Singup";
 import { useAuthContext } from "./hooks/useAuthContext";
 import useSinglePostContext from "./hooks/useSinglePostContext";
 import SinglePost from "./components/SinglePost";
-import UploadingImg from "./components/Singup/UploadingImg";
+import UploadingImg from "./components/UploadingImg";
+import Loading from "./components/animation/Loading";
 function App() {
   const { state } = useAuthContext();
-  const { singlePost } = useSinglePostContext();
+  const { singlePost, loadingPost } = useSinglePostContext();
   return (
     <BrowserRouter>
       <Routes>
@@ -33,7 +34,15 @@ function App() {
 
         <Route
           path="/singlePost"
-          element={singlePost === null ? <Navigate to="/" /> : <SinglePost />}
+          element={
+            loadingPost ? (
+              <Loading />
+            ) : singlePost === null ? (
+              <Navigate to="/" />
+            ) : (
+              <SinglePost />
+            )
+          }
         />
 
         <Route path="noUser" element={<NoUser />} />

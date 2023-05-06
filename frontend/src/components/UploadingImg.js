@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 export default function UploadingImg() {
   const [imageFile, setimageFile] = useState(null);

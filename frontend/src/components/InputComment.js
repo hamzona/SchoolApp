@@ -15,8 +15,8 @@ function InputComment() {
   const {
     comments,
     dispatch: upadateComment,
-    loading,
-    setLoading,
+    loadingComments,
+    setLoadingComments,
   } = useCommentContext();
   const navigate = useNavigate();
   useEffect(() => {
@@ -28,7 +28,7 @@ function InputComment() {
     if (!state.user) {
       return navigate("/login");
     }
-    setLoading(true);
+    setLoadingComments(true);
     const res = await fetch("http://localhost:4000/api/comments/add", {
       method: "POST",
       headers: {
@@ -65,7 +65,7 @@ function InputComment() {
     }
 
     if (res.ok) {
-      setLoading(false);
+      setLoadingComments(false);
       upadateComment({ type: "add", payload: json.newComment });
       updateSinglePost({ type: "setSinglePost", payload: postWithComment });
       setRate(0);
@@ -106,7 +106,7 @@ function InputComment() {
           <button className={InputCommentCss.submit} type="submit">
             Submit
           </button>
-          {loading ? <div>Posting...</div> : null}
+          {loadingComments ? <div>Posting...</div> : null}
         </div>
       </form>
     </div>

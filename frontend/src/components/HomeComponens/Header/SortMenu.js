@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { usePostContext } from "../../hooks/usePostContext";
-import SortManuCss from "../../styles/Home/sortManu.module.css";
+import { usePostContext } from "../../../hooks/usePostContext";
+import SortManuCss from "../../../styles/Home/Header/sortManu.module.css";
 export default function SortMenu() {
   const { setSortBy, setPage } = usePostContext();
   const [localRate, setLocalRate] = useState(undefined);

@@ -17,11 +17,11 @@ function updateReducer(state, action) {
 export function CommentContextProvider({ children }) {
   const [comments, dispatch] = useReducer(updateReducer, []);
   const { singlePost } = useSinglePostContext();
-  const [loading, setLoading] = useState(false);
+  const [loadingComments, setLoadingComments] = useState(false);
   useEffect(() => {
     if (singlePost === null) return;
     async function getData() {
-      setLoading(true);
+      setLoadingComments(true);
       const res = await fetch(" http://localhost:4000/api/comments/all    ", {
         method: "POST",
         headers: {
@@ -47,7 +47,7 @@ export function CommentContextProvider({ children }) {
       );
       if (res.ok) {
         dispatch({ type: "setComments", payload: commentsWithImg });
-        setLoading(false);
+        setLoadingComments(false);
       }
     }
     getData();
@@ -56,7 +56,7 @@ export function CommentContextProvider({ children }) {
   useEffect(() => {}, []);
   return (
     <CommentContext.Provider
-      value={{ comments, dispatch, loading, setLoading }}
+      value={{ comments, dispatch, loadingComments, setLoadingComments }}
     >
       {children}
     </CommentContext.Provider>

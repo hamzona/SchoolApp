@@ -4,7 +4,7 @@ const {
   addPost,
   deletePost,
   updatePost,
-  getAllMyPosts,
+  getProfilPosts,
   saveMultipleFileNames,
 } = require("../controllers/postController");
 
@@ -16,7 +16,7 @@ const { filterPosts } = require("../middleware/filterPosts");
 route.get("/allPosts", filterPosts, pagination);
 
 //get allMyPosts
-route.get("/allMy", authJwt, getAllMyPosts);
+route.get("/allMy", getProfilPosts);
 
 // add
 route.post("/add", authJwt, addPost);
