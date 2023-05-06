@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { AuthContextProvider } from "./contexts/authContext";
-import { MyPostsContextProvider } from "./contexts/myPostsContext";
+import { ProfilPostsContextProvider } from "./contexts/profilPostsContext";
 import { PostContextProvider } from "./contexts/postContext";
 import { SinglePostProvider } from "./contexts/singlePostContext";
 import { CommentContextProvider } from "./contexts/commentContext";
@@ -11,13 +11,13 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <PostContextProvider>
-        <MyPostsContextProvider>
+        <ProfilPostsContextProvider>
           <SinglePostProvider>
             <CommentContextProvider>
               <App />
             </CommentContextProvider>
           </SinglePostProvider>
-        </MyPostsContextProvider>
+        </ProfilPostsContextProvider>
       </PostContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

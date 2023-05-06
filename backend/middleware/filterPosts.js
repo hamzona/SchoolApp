@@ -3,6 +3,7 @@ const User = require("../models/authModel");
 const filterPosts = async (req, res, next) => {
   /*sortiranje */
   const { sortBy } = req.query;
+
   let sortOpition = {};
   if (sortBy === "rate") {
     sortOpition = { rate: -1 };
@@ -64,6 +65,14 @@ const filterPosts = async (req, res, next) => {
       return postWuser;
     })
   );
+  // req.data = dataWithUser.filter((item) => {
+  //   if (!user) {
+  //     return item;
+  //   } else if (item.name === user) {
+  //     return item;
+  //   }
+  // });
+
   next();
 };
 

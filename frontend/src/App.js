@@ -8,7 +8,7 @@ import { Singup } from "./components/Singup/Singup";
 import { useAuthContext } from "./hooks/useAuthContext";
 import useSinglePostContext from "./hooks/useSinglePostContext";
 import SinglePost from "./components/SinglePost";
-import UploadingImg from "./components/Singup/UploadingImg";
+import UploadingImg from "./components/UploadingImg";
 import Loading from "./components/animation/Loading";
 function App() {
   const { state } = useAuthContext();

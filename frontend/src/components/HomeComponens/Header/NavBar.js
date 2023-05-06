@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { usePostContext } from "../../../hooks/usePostContext";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-
+import { useProfilPostsContext } from "../../../hooks/useProfilPostsContext";
 import NavBarCss from "../../../styles/Home/Header/navBar.module.css";
 
 import Filter from "./Filter";
@@ -16,6 +16,7 @@ export default function NavBar() {
     setMinPrice,
     setMaxPrice,
     setJobType,
+
     jobType,
     subjects,
     minPrice,
@@ -23,7 +24,7 @@ export default function NavBar() {
   } = usePostContext();
   const { state: stateUser, imgUrl } = useAuthContext();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-
+  const { setUser } = useProfilPostsContext();
   /* filter job type */
 
   const url = !imgUrl ? noUserImg : imgUrl;
@@ -54,6 +55,28 @@ export default function NavBar() {
   return (
     <div className={NavBarCss.container}>
       <div className={NavBarCss.filter_search_profil_container}>
+        {stateUser.user !== null ? (
+          <Link
+            onClick={() => {
+              setUser(stateUser.user.name);
+            }}
+            className={`${NavBarCss.child} ${NavBarCss.profilContainer}`}
+            to="/profil"
+          >
+            {stateUser.user.name}
+            <div style={imgStyles} className={NavBarCss.profilImg}></div>
+          </Link>
+        ) : (
+          <div className={NavBarCss.loginSingupCont}>
+            <Link className={NavBarCss.loginLink} to="/login">
+              login
+            </Link>
+            {"  "}
+            <Link className={NavBarCss.singupLink} to="/singup">
+              singup
+            </Link>
+          </div>
+        )}
         <div className={`${NavBarCss.child} ${NavBarCss.Fbuttons}`}>
           <button
             className={`${NavBarCss.child} ${NavBarCss.filterBtn} `}
@@ -81,26 +104,6 @@ export default function NavBar() {
 
         <Sort />
         <Search />
-
-        {stateUser.user !== null ? (
-          <Link
-            className={`${NavBarCss.child} ${NavBarCss.profilContainer}`}
-            to="/profil"
-          >
-            {stateUser.user.name}
-            <div style={imgStyles} className={NavBarCss.profilImg}></div>
-          </Link>
-        ) : (
-          <div className={NavBarCss.loginSingupCont}>
-            <Link className={NavBarCss.loginLink} to="/login">
-              login
-            </Link>
-            {"  "}
-            <Link className={NavBarCss.singupLink} to="/singup">
-              singup
-            </Link>
-          </div>
-        )}
       </div>
 
       <div className={NavBarCss.dataTypeContainer}>

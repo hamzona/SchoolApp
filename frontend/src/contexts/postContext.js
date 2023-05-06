@@ -31,7 +31,9 @@ export function PostContextProvider({ children }) {
 
   /*sort */
   const [sortBy, setSortBy] = useState("");
-
+  /*posts from user */
+  // const [user, setUser] = useState(null);
+  // console.log(user);
   /*Loading */
   const [isLoadingPosts, setIsLoadingPosts] = useState(false);
   useEffect(() => {
@@ -53,6 +55,7 @@ export function PostContextProvider({ children }) {
     if (!jobType) {
       params.delete("jobType");
     }
+
     subjects.forEach((subject) => {
       params.append("subject", subject);
     });
@@ -111,7 +114,6 @@ export function PostContextProvider({ children }) {
     };
     getAllPosts();
   }, [page, search, subjects, minPrice, maxPrice, jobType, sortBy]);
-
   return (
     <PostContext.Provider
       value={{
@@ -126,7 +128,6 @@ export function PostContextProvider({ children }) {
         setMinPrice,
         setJobType,
         setSortBy,
-
         sortBy,
         jobType,
         error,

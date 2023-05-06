@@ -13,16 +13,15 @@ body {
 .container {
   cursor: pointer;
   padding: 20px;
-  /* height: 400px;
-  width: 400px; */
   min-height: 390px;
   height: 30rem;
   max-height: 420px;
 
   max-width: 450px;
-  font-size: 20px;
-  border: solid 2px black;
+  font-size: 10rem;
   border-radius: 10px;
+
+  box-shadow: 1px 5px 5px 5px rgb(179, 179, 179);
   box-sizing: border-box;
   position: relative;
   display: block;
@@ -65,5 +64,5 @@ body {
 
 .postImg {
   width: 100%;
-  height: 200px;
+  height: 60%;
 }

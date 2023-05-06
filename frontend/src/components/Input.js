@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { usePostContext } from "../hooks/usePostContext";
-import { useMyPostsContext } from "../hooks/useMyPostsContext";
+import { useProfilPostsContext } from "../hooks/useProfilPostsContext";
 import { Link, useNavigate } from "react-router-dom";
 import InputCss from "../styles/input.module.css";
 
@@ -10,7 +10,7 @@ export default function Input() {
   const [error, setError] = useState(null);
   const { state } = useAuthContext();
   const { dispatch: updatePosts } = usePostContext();
-  const { dispatch: updateMyPosts } = useMyPostsContext();
+  const { dispatch: updateMyPosts } = useProfilPostsContext();
 
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -219,9 +219,10 @@ export default function Input() {
         </div>
 
         <div className={InputCss.selectedImagesContainer}>
-          {selectedImages.map((image) => {
+          {selectedImages.map((image, index) => {
             return (
               <div
+                key={index}
                 className={InputCss.selectedImage}
                 style={{
                   backgroundImage: "url(" + image + ")",

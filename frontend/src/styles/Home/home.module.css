@@ -45,7 +45,6 @@ body {
 
 .posts {
   padding: 3em 0;
-  background-color: rgb(230, 230, 230);
   width: min-content;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 30%));
