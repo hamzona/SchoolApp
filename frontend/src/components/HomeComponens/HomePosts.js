@@ -12,12 +12,10 @@ export default function HomePosts({ item }) {
   const [fetchPostData] = useFetchSinglePost();
   const navigate = useNavigate();
 
-
-export default function HomePosts({ item }) {
-  const { dispatch } = useSinglePostContext();
-  function hendleClick() {
+  //const { dispatch } = useSinglePostContext();
+  /*function hendleClick() {
     dispatch({ type: "setSinglePost", payload: item });
-  }
+  }*/
 
   const url = !item.imgURL ? noUserImg : item.imgURL;
   const imgStyles = {
