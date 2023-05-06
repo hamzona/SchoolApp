@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HomePostsCss from "../../styles/Home/homePosts.module.css";
 //import useSinglePostContext from "../../hooks/useSinglePostContext";
 import DatePost from "./DatePost";
 import noUserImg from "../../img/user-icon-linear-user-icon-gray-background-106603311.jpg";
 import noPostImg from "../../img/no-image.jpg";
+
 import { useFetchSinglePost } from "../../hooks/useFetchSinglePost";
 import { useNavigate } from "react-router-dom";
 export default function HomePosts({ item }) {
   // const { dispatch } = useSinglePostContext();
   const [fetchPostData] = useFetchSinglePost();
   const navigate = useNavigate();
+
+
+export default function HomePosts({ item }) {
+  const { dispatch } = useSinglePostContext();
+  function hendleClick() {
+    dispatch({ type: "setSinglePost", payload: item });
+  }
 
   const url = !item.imgURL ? noUserImg : item.imgURL;
   const imgStyles = {
@@ -18,13 +26,9 @@ export default function HomePosts({ item }) {
     backgroundSize: `cover`,
     backgroundRepeat: "no-repeat",
   };
-  const [urlPost, setUrlPost] = useState(noPostImg);
 
-  useEffect(() => {
-    setUrlPost(
-      Array.from(item.postImgs).length === 0 ? noPostImg : item.postUrls[0]
-    );
-  }, [item]);
+  const urlPost =
+    Array.from(item.postImgs).length === 0 ? noPostImg : item.postUrls[0];
 
   const imgPostStyles = {
     backgroundImage: "url(" + urlPost + ")",
