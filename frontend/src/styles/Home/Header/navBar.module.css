@@ -60,7 +60,14 @@
 @media (width<735px) {
   .filter_search_profil_container {
     display: flex;
+
+    flex-wrap: wrap;
+  }
+}
+/* @media (width<735px) {
+  .filter_search_profil_container {
+    display: flex;
     flex-direction: row-reverse;
     flex-wrap: wrap-reverse;
   }
-}
+} */

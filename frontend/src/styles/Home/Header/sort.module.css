@@ -7,3 +7,11 @@
 .label {
   font-size: 1rem;
 }
+.container select {
+  min-height: 1vw;
+  min-width: 20px;
+  font-size: 1em;
+}
+.container option {
+  font-size: 1em;
+}

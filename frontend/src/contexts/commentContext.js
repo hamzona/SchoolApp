@@ -22,7 +22,8 @@ export function CommentContextProvider({ children }) {
     if (singlePost === null) return;
     async function getData() {
       setLoadingComments(true);
-      const res = await fetch(" http://localhost:4000/api/comments/all    ", {
+      console.log(singlePost);
+      const res = await fetch(" http://localhost:4000/api/comments/all", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

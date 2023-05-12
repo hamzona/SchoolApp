@@ -24,9 +24,12 @@ export default function HomePosts({ item }) {
     backgroundSize: `cover`,
     backgroundRepeat: "no-repeat",
   };
-
-  const urlPost =
-    Array.from(item.postImgs).length === 0 ? noPostImg : item.postUrls[0];
+  console.log(item);
+  const urlPost = !item.postUrls
+    ? null
+    : Array.from(item.postUrls).length === 0
+    ? noPostImg
+    : item.postUrls[0];
 
   const imgPostStyles = {
     backgroundImage: "url(" + urlPost + ")",

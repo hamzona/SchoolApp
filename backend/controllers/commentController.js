@@ -45,7 +45,7 @@ const postComment = async (req, res, next) => {
       { $set: { rate: sum } },
       { returnOriginal: false }
     );
-
+    console.log(postRate);
     const user = await User.findOne({ _id: req.user }, { _id: 0, password: 0 });
     newComment = { ...user._doc, ...newComment._doc };
     res.json({ newComment, postRate });

@@ -31,7 +31,7 @@ export default function Search() {
     >
       <input className={SearchCss.inputTag} ref={search} type="text" />
       <button className={SearchCss.buttonTag} type="submit">
-        search
+        Search
       </button>
     </form>
   );
