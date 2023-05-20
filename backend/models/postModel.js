@@ -8,7 +8,7 @@ const Post = new mongoose.Schema({
   subject: { type: String },
   jobType: { type: String },
   userId: { type: String, required: true },
-  rate: { type: Number, required: true },
+  likes: { type: Number, required: true },
   date: { type: Date, required: true },
   userImg: { type: String },
   postImgs: { type: Array },

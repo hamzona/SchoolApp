@@ -66,3 +66,7 @@
 div {
   font-family: arial;
 }
+.contentImg {
+  min-height: 10vw;
+  min-width: 10vw;
+}

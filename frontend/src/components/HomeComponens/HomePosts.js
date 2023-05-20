@@ -24,7 +24,6 @@ export default function HomePosts({ item }) {
     backgroundSize: `cover`,
     backgroundRepeat: "no-repeat",
   };
-  console.log(item);
   const urlPost = !item.postUrls
     ? null
     : Array.from(item.postUrls).length === 0

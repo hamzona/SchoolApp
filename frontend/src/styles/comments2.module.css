@@ -1,0 +1,33 @@
+.container {
+  width: 80vw;
+  min-height: 50vh;
+  background: #dbdbdb;
+  margin: 20vh 0;
+  border-radius: 10px;
+}
+.userName {
+  font-size: clamp(1rem, 5vw, 3rem);
+}
+.userImage {
+  width: 5vw;
+  height: 5vw;
+
+  border-radius: 50%;
+  margin: 1vw 2vw;
+}
+.userContainer {
+  display: flex;
+  align-items: center;
+}
+.content {
+  font-size: clamp(1rem, 1.4vw, 3rem);
+  padding: 10vh 10vw;
+}
+.contentImg {
+  min-height: 15vw;
+  min-width: 15vw;
+  margin: 1vw;
+}
+.imgsContainer {
+  padding: 10vh 9vw;
+}

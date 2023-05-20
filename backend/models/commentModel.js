@@ -5,6 +5,7 @@ const Schema = new mongoose.Schema({
   postId: { type: String, required: true },
   userId: { type: String, required: true },
   rate: { type: Number },
+  commentImgsNames: { type: Array, required: true },
 });
 const model = mongoose.model("Comments", Schema);
 

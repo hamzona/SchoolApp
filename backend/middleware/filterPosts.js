@@ -66,7 +66,6 @@ const filterPosts = async (req, res, next) => {
       return postWuser;
     })
   );
-  console.log(req.data)
   // req.data = dataWithUser.filter((item) => {
   //   if (!user) {
   //     return item;

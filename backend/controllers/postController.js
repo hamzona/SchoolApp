@@ -15,7 +15,7 @@ const addPost = async (req, res) => {
       subject: subject,
       jobType: jobType,
       userId: req.user,
-      rate: 0,
+      likes: 0,
       date: new Date(),
     });
 

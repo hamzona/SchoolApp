@@ -13,7 +13,7 @@ export default function Input() {
   const { dispatch: updateMyPosts } = useProfilPostsContext();
 
   const [images, setImages] = useState([]);
-  const [selectedImages, setSelectedImages] = useState([]);
+  const [readableImages, setReadableImages] = useState([]);
   const navigate = useNavigate();
 
   const subjectsConst = [
@@ -98,7 +98,7 @@ export default function Input() {
       reader.onload = () => {
         selectedFilesCopy.push(reader.result);
         if (selectedFilesCopy.length === files.length) {
-          setSelectedImages(selectedFilesCopy);
+          setReadableImages(selectedFilesCopy);
         }
       };
     }
@@ -219,7 +219,7 @@ export default function Input() {
         </div>
 
         <div className={InputCss.selectedImagesContainer}>
-          {selectedImages.map((image, index) => {
+          {readableImages.map((image, index) => {
             return (
               <div
                 key={index}
