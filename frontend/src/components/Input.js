@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { usePostContext } from "../hooks/usePostContext";
+//import { usePostContext } from "../hooks/usePostContext";
 import { useProfilPostsContext } from "../hooks/useProfilPostsContext";
 import { Link, useNavigate } from "react-router-dom";
-import InputCss from "../styles/input.module.css";
+import InputCss from "../styles/inputStyle.module.css";
 
 export default function Input() {
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
   const { state } = useAuthContext();
-  const { dispatch: updatePosts } = usePostContext();
+  //  const { dispatch: updatePosts } = usePostContext();
   const { dispatch: updateMyPosts } = useProfilPostsContext();
 
   const [images, setImages] = useState([]);
   const [readableImages, setReadableImages] = useState([]);
   const navigate = useNavigate();
-
+  console.log(data);
   const subjectsConst = [
     "matematika",
     "biologija",
@@ -83,9 +83,17 @@ export default function Input() {
   function hendleChange(e) {
     let copy = data;
     copy[e.target.id] = e.target.value;
-    setData(copy);
+    setData({ ...copy });
+    console.log(data);
   }
 
+  function hendleJobTypeChange(e) {
+    console.log(e.target.checked);
+    let copy = data;
+    copy[e.target.id] = e.target.checked ? e.target.value : undefined;
+    setData({ ...copy });
+    console.log(data);
+  }
   function imageChange(e) {
     setImages(e.target.files);
 
@@ -103,10 +111,19 @@ export default function Input() {
       };
     }
   }
+
+  /*DATA TYPES */
+
+  const dataTypes = [
+    "Questions",
+    "Finished tasks",
+    "Instruction offers",
+    "Instruction needs",
+  ];
   return (
     <div className={InputCss.container}>
       <Link className={InputCss.back} to="/profil">
-        Cancle
+        {"<--"}
       </Link>
       <div className={InputCss.title}>Upload post</div>
 
@@ -130,6 +147,30 @@ export default function Input() {
               hendleChange(e);
             }}
           />
+        </div>
+
+        <div className={InputCss.jobTypeCont}>
+          {/* <label htmlFor="jobType" className={InputCss.label}>
+            Job-type:{" "}
+          </label> */}
+          {dataTypes.map((type, index) => {
+            return (
+              <div className={InputCss.jobTypeHelpCont}>
+                <input
+                  type="checkbox"
+                  key={index}
+                  id="jobType"
+                  checked={type === data.jobType}
+                  className={InputCss.dataTypeOption}
+                  onClick={(e) => {
+                    hendleJobTypeChange(e);
+                  }}
+                  value={type}
+                />
+                <label>{type}</label>
+              </div>
+            );
+          })}
         </div>
         <div className={InputCss.inputContainer}>
           <label className={InputCss.label} htmlFor="description">
@@ -185,23 +226,6 @@ export default function Input() {
                 </option>
               );
             })}
-          </select>
-        </div>
-
-        <div className={InputCss.jobTypeCont}>
-          <label htmlFor="jobType" className={InputCss.label}>
-            Job-type:{" "}
-          </label>
-          <select
-            className={InputCss.select}
-            id="jobType"
-            value={data.jobType}
-            onChange={(e) => hendleChange(e)}
-            defaultValue={undefined}
-          >
-            <option value={undefined}>unchecked</option>
-            <option value="homework">homework</option>
-            <option value="instruction">instruction</option>
           </select>
         </div>
 
