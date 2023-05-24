@@ -50,7 +50,6 @@ function InputComment() {
     });
 
     const json = await res.json();
-    console.log(json);
     if (res.ok) {
       const formData = new FormData();
       const fileList = Array.from(images);
@@ -69,8 +68,6 @@ function InputComment() {
       );
       var jsonWithImgs = await resWithImgs.json();
     }
-
-    console.log(jsonWithImgs);
 
     /*FETCHING PROFIL IMAGE */
     if (!jsonWithImgs.imgName) return jsonWithImgs;

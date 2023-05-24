@@ -15,7 +15,6 @@ export default function Input() {
   const [images, setImages] = useState([]);
   const [readableImages, setReadableImages] = useState([]);
   const navigate = useNavigate();
-  console.log(data);
   const subjectsConst = [
     "matematika",
     "biologija",
@@ -84,15 +83,12 @@ export default function Input() {
     let copy = data;
     copy[e.target.id] = e.target.value;
     setData({ ...copy });
-    console.log(data);
   }
 
   function hendleJobTypeChange(e) {
-    console.log(e.target.checked);
     let copy = data;
     copy[e.target.id] = e.target.checked ? e.target.value : undefined;
     setData({ ...copy });
-    console.log(data);
   }
   function imageChange(e) {
     setImages(e.target.files);

@@ -3,6 +3,7 @@ import { createContext, useEffect, useReducer, useState } from "react";
 export const PostContext = createContext();
 
 function updateReducer(state, action) {
+  console.log(action.payload._id);
   switch (action.type) {
     case "setPosts":
       return action.payload;
@@ -10,7 +11,13 @@ function updateReducer(state, action) {
       return [action.payload, ...state];
     case "deletePost":
       return state.filter((item) => item._id !== action.payload._id);
-    case "updatePosts":
+    case "like":
+      return state.map((item) => {
+        if (item._id === action.payload._id) {
+          return action.payload;
+        }
+        return item;
+      });
     default:
       return state;
   }

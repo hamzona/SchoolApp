@@ -87,3 +87,17 @@
 .postImgs {
   margin: 1vh 0%;
 }
+.likeContainer {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.likeButton {
+  padding: 0.5vw;
+  border-radius: 10px;
+  font-size: clamp(1rem, 1vw, 2rem);
+}
+.likeNumber {
+  font-size: clamp(1rem, 1vw, 2rem);
+  margin-right: 1vw;
+}

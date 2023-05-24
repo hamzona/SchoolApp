@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import useSinglePostContext from "../hooks/useSinglePostContext";
+import useSinglePostContext from "../../hooks/useSinglePostContext";
 //import SinglePostCss from "../styles/singlePost.module.css";
-import SinglePostCss from "../styles/singlePostStil.module.css";
-import InputCommnet from "./InputComment";
-import useCommentContext from "../hooks/useCommentContext";
-import Comment from "./Comment";
-import DatePost from "./HomeComponens/DatePost";
-import noUserImg from "../img/user-icon-linear-user-icon-gray-background-106603311.jpg";
+import SinglePostCss from "../../styles/singlePostStil.module.css";
+import InputCommnet from "../InputComment";
+import useCommentContext from "../../hooks/useCommentContext";
+import Comment from "../Comment";
+import DatePost from "../HomeComponens/DatePost";
+import noUserImg from "../../img/user-icon-linear-user-icon-gray-background-106603311.jpg";
+import Like from "./Like";
 //import noPostImg from "../img/no-image.jpg";
 
 export default function SinglePost() {
@@ -150,6 +151,7 @@ export default function SinglePost() {
             </div>
           </div>
         )}
+        <Like />
         {/* <DatePost date={singlePost.date} /> */}
       </div>
       <InputCommnet />
