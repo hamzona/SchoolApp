@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { usePostContext } from "../../hooks/usePostContext";
 import useSinglePostContext from "../../hooks/useSinglePostContext";
+import SinglePostCss from "../../styles/singlePostStil.module.css";
+
 export default function Like() {
   const { state } = useAuthContext();
   const { singlePost } = useSinglePostContext();
@@ -11,6 +13,7 @@ export default function Like() {
   const [liked, setLiked] = useState(
     singlePost.likes.includes(state.user.name)
   );
+  const [likes, setLikes] = useState(singlePost.likes.length);
   console.log(liked);
   async function hendleLike() {
     const res = await fetch(
@@ -27,11 +30,14 @@ export default function Like() {
     if (res.ok) {
       setLiked((prev) => !prev);
       dispatch({ type: "like", payload: json });
+      setLikes(json.likes.length);
     }
   }
   return (
-    <div>
+    <div className={SinglePostCss.likeContainer}>
+      <div className={SinglePostCss.likeNumber}>{likes}</div>
       <button
+        className={SinglePostCss.likeButton}
         style={{ backgroundColor: liked ? "red" : "gray" }}
         onClick={() => hendleLike()}
       >
