@@ -7,7 +7,7 @@ import Profil from "./components/Profil";
 import { Singup } from "./components/Singup/Singup";
 import { useAuthContext } from "./hooks/useAuthContext";
 import useSinglePostContext from "./hooks/useSinglePostContext";
-import SinglePost from "./components/SinglePost";
+import SinglePost from "./components/SinglePost/SinglePost";
 import UploadingImg from "./components/UploadingImg";
 import Loading from "./components/animation/Loading";
 function App() {

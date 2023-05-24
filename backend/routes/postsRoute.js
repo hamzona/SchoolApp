@@ -5,7 +5,7 @@ const {
   deletePost,
   updatePost,
   getProfilPosts,
-  saveMultipleFileNames,
+  likePost,
 } = require("../controllers/postController");
 
 //middleware
@@ -20,7 +20,8 @@ route.get("/allMy", getProfilPosts);
 
 // add
 route.post("/add", authJwt, addPost);
-
+//like
+route.post("/like/:postId", authJwt, likePost);
 //delete
 route.post("/delete", authJwt, deletePost);
 

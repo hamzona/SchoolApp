@@ -18,7 +18,6 @@ export function CommentContextProvider({ children }) {
   const [comments, dispatch] = useReducer(updateReducer, []);
   const { singlePost } = useSinglePostContext();
   const [loadingComments, setLoadingComments] = useState(false);
-  console.log(comments);
   useEffect(() => {
     if (singlePost === null) return;
     async function getData() {
