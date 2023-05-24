@@ -6,7 +6,7 @@ const Post = new mongoose.Schema({
   description: { type: String },
   price: { type: Number, default: null },
   subject: { type: String },
-  jobType: { type: String },
+  dataType: { type: String },
   userId: { type: String, required: true },
   likes: { type: Number, required: true },
   date: { type: Date, required: true },
