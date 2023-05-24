@@ -2,7 +2,7 @@ const Post = require("../models/postModel");
 const User = require("../models/authModel");
 const addPost = async (req, res) => {
   const { title, price, description, subject, dataType } = req.body;
-
+  console.log(dataType);
   try {
     if (!title) {
       throw Error("Title is required");

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { usePostContext } from "../../../hooks/usePostContext";
 import FilterCss from "../../../styles/Home/Header/filter.module.css";
 export default function Filter({ setIsFilterOpen }) {
-  const { setSubjects, setMinPrice, setMaxPrice, setJobType, setPage } =
-    usePostContext();
+  const { setSubjects, setMinPrice, setMaxPrice, setPage } = usePostContext();
   const [filterSubject, setFilterSubject] = useState([]);
   const [minPriceF, setMinPriceF] = useState("");
   const [maxPriceF, setMaxPriceF] = useState("");
@@ -33,7 +32,6 @@ export default function Filter({ setIsFilterOpen }) {
     setSubjects(filterSubject);
     setMinPrice(minPriceF);
     setMaxPrice(maxPriceF);
-    setJobType(jobTypeF);
     setPage(1);
     setIsFilterOpen(false);
   }

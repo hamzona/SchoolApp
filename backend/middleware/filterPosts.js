@@ -36,11 +36,12 @@ const filterPosts = async (req, res, next) => {
     : {};
   let filters = {};
   Object.keys(req.query).forEach((item) => {
-    if (item === "subject" || item === "jobType") {
+    console.log(item);
+    if (item === "subject" || item === "dataType") {
       filters[item] = req.query[item];
     }
   });
-
+  console.log(filters);
   const posts = await Post.find({
     $and: [
       {

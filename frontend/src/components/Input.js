@@ -45,7 +45,7 @@ export default function Input() {
         price: data.price,
         description: data.description,
         subject: data.subject,
-        jobType: data.jobType,
+        dataType: data.dataType,
       }),
     });
     const json = await res.json();
@@ -126,12 +126,7 @@ export default function Input() {
         {"<--"}
       </Link>
 
-      <form
-        className={InputCss.form}
-        onSubmit={(e) => {
-          hendleSubmit(e);
-        }}
-      >
+      <div className={InputCss.form}>
         <div className={InputCss.title}>Upload post</div>
         {/* TITLE */}
         <div className={InputCss.inputContainerTitle}>
@@ -267,12 +262,18 @@ export default function Input() {
           </div>
         )}
         <div className={InputCss.buttonSubmitContainer}>
-          <button className={InputCss.buttonSubmit} type="submit">
+          <button
+            onClick={(e) => {
+              hendleSubmit(e);
+            }}
+            className={InputCss.buttonSubmit}
+            type="submit"
+          >
             submit
           </button>
         </div>
         {error && <div className={InputCss.error}>{error}</div>}
-      </form>
+      </div>
     </div>
   );
 }

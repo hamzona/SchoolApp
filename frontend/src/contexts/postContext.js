@@ -26,7 +26,7 @@ export function PostContextProvider({ children }) {
   const [subjects, setSubjects] = useState([]);
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
-  const [jobType, setJobType] = useState(null);
+  const [dataType, setDataType] = useState(null);
   const [error, setError] = useState(null);
 
   /*sort */
@@ -38,10 +38,10 @@ export function PostContextProvider({ children }) {
   const [isLoadingPosts, setIsLoadingPosts] = useState(false);
   useEffect(() => {
     let params = new URLSearchParams(
-      `page=${page}&limit=20&search=${search}&min=${minPrice}&max=${maxPrice}&jobType=${jobType}&sortBy=${sortBy}`
+      `page=${page}&limit=20&search=${search}&min=${minPrice}&max=${maxPrice}&dataType=${dataType}&sortBy=${sortBy}`
     );
-    if (!jobType) {
-      params.delete("jobType");
+    if (!dataType) {
+      params.delete("dataType");
     }
     if (!search) {
       params.delete("search");
@@ -51,9 +51,6 @@ export function PostContextProvider({ children }) {
     }
     if (!maxPrice) {
       params.delete("max");
-    }
-    if (!jobType) {
-      params.delete("jobType");
     }
 
     subjects.forEach((subject) => {
@@ -113,7 +110,7 @@ export function PostContextProvider({ children }) {
       setIsLoadingPosts(false);
     };
     getAllPosts();
-  }, [page, search, subjects, minPrice, maxPrice, jobType, sortBy]);
+  }, [page, search, subjects, minPrice, maxPrice, dataType, sortBy]);
   return (
     <PostContext.Provider
       value={{
@@ -126,10 +123,10 @@ export function PostContextProvider({ children }) {
         setSearch,
         setMaxPrice,
         setMinPrice,
-        setJobType,
+        setDataType,
         setSortBy,
         sortBy,
-        jobType,
+        dataType,
         error,
         isLoadingPosts,
         subjects,
