@@ -16,6 +16,7 @@ export default function NavBar() {
     setMinPrice,
     setMaxPrice,
     setJobType,
+
     jobType,
     subjects,
     minPrice,
@@ -49,16 +50,11 @@ export default function NavBar() {
     return false;
   }
 
-  const dataTypes = [
-    "Questions",
-    "Finished tasks",
-    "Instruction offers",
-    "Instruction needs",
-  ];
+  const dataTypes = ["", "homework", "instruction"];
 
   return (
     <div className={NavBarCss.container}>
-      <div className={NavBarCss.profilContainerContainer}>
+      <div className={NavBarCss.filter_search_profil_container}>
         {stateUser.user !== null ? (
           <Link
             onClick={() => {
@@ -67,26 +63,23 @@ export default function NavBar() {
             className={`${NavBarCss.child} ${NavBarCss.profilContainer}`}
             to="/profil"
           >
-            <div style={imgStyles} className={NavBarCss.profilImg}></div>
             {stateUser.user.name}
+            <div style={imgStyles} className={NavBarCss.profilImg}></div>
           </Link>
         ) : (
           <div className={NavBarCss.loginSingupCont}>
-            <Link className={NavBarCss.Link} to="/login">
+            <Link className={NavBarCss.loginLink} to="/login">
               login
             </Link>
-            {"|"}
-            <Link className={NavBarCss.Link} to="/singup">
+            {"  "}
+            <Link className={NavBarCss.singupLink} to="/singup">
               singup
             </Link>
           </div>
         )}
-      </div>
-
-      <div className={NavBarCss.filter_search_profil_container}>
-        <div className={` ${NavBarCss.Fbuttons}`}>
+        <div className={`${NavBarCss.child} ${NavBarCss.Fbuttons}`}>
           <button
-            className={` ${NavBarCss.filterBtn} `}
+            className={`${NavBarCss.child} ${NavBarCss.filterBtn} `}
             onClick={() =>
               setIsFilterOpen((prev) => {
                 return !prev;
@@ -115,20 +108,21 @@ export default function NavBar() {
 
       <div className={NavBarCss.dataTypeContainer}>
         {dataTypes.map((type, index) => {
-          const typeStyle = { background: type === jobType ? " #C89000" : "" };
+          const typeStyle = { background: type === jobType ? "red" : "" };
           return (
             <div
               key={index}
               className={NavBarCss.dataTypeOption}
               style={typeStyle}
               onClick={() => {
-                if (type === jobType) {
-                  return setJobType(null);
+                if (type === "all") {
+                  return setJobType("");
                 }
+
                 setJobType(type);
               }}
             >
-              {type}
+              {type === "" ? "all" : type}
             </div>
           );
         })}

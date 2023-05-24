@@ -38,7 +38,7 @@ export default function Profil() {
         className={ProfilCss.back}
         to="/"
       >
-        {"<--"}
+        BACK
       </Link>
 
       <div className={ProfilCss.profilContainer}>
@@ -65,11 +65,11 @@ export default function Profil() {
             Log out
           </button>
         </div>
-        <Link className={ProfilCss.inputLink} to="/input">
-          Upload new post
-        </Link>
       </div>
 
+      <Link className={ProfilCss.inputLink} to="/input">
+        Upload new post
+      </Link>
       {/* <div className={ProfilCss.titleMyPosts}>My posts:</div> */}
       <div className={ProfilCss.postsContainer}>
         {isLoadingProfilPosts ? (

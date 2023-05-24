@@ -2,8 +2,6 @@ require("dotenv").config();
 
 const User = require("../models/authModel");
 const Post = require("../models/postModel");
-const Comment = require("../models/commentModel");
-
 const multer = require("multer");
 const Grid = require("gridfs-stream");
 const { GridFsStorage } = require("multer-gridfs-storage");
@@ -29,7 +27,6 @@ const storage = new GridFsStorage({
 
 const uploadSingle = multer({ storage }).single("img");
 const uploadMultiple = multer({ storage }).array("imgs");
-
 const saveFileName = async (req, res) => {
   if (!req.file.filename) {
     const user = await User.findById({ _id: req.user });
@@ -70,35 +67,6 @@ const saveMultipleFileNames = async (req, res) => {
     res.status(400).json({ error: e.message });
   }
 };
-
-/*Save img names in comment */
-const saveMultipleImagesNamesComment = async (req, res) => {
-  const fileNames = req.files.map((file) => {
-    return file.filename;
-  });
-  try {
-    let comment = await Comment.findByIdAndUpdate(
-      { _id: req.params.commentId },
-      {
-        $set: {
-          commentImgsNames: fileNames,
-        },
-      },
-      {
-        returnOriginal: false,
-      }
-    );
-    const user = await User.findOne(
-      { _id: comment.userId },
-      { _id: 0, password: 0 }
-    );
-    comment = { ...comment._doc, ...user._doc };
-    res.json(comment);
-  } catch (e) {
-    res.status(400).json({ error: e.message });
-  }
-};
-
 const MongoClient = require("mongodb").MongoClient;
 
 const mongoClient = new MongoClient(process.env.MONGO_URL);
@@ -197,5 +165,4 @@ module.exports = {
   deleteImg,
 
   saveMultipleFileNames,
-  saveMultipleImagesNamesComment,
 };

@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import useSinglePostContext from "../hooks/useSinglePostContext";
-//import SinglePostCss from "../styles/singlePost.module.css";
-import SinglePostCss from "../styles/singlePostStil.module.css";
+import SinglePostCss from "../styles/singlePost.module.css";
 import InputCommnet from "./InputComment";
 import useCommentContext from "../hooks/useCommentContext";
 import Comment from "./Comment";
 import DatePost from "./HomeComponens/DatePost";
 import noUserImg from "../img/user-icon-linear-user-icon-gray-background-106603311.jpg";
-//import noPostImg from "../img/no-image.jpg";
+import noPostImg from "../img/no-image.jpg";
 
 export default function SinglePost() {
   const { singlePost, dispatch } = useSinglePostContext();
-  // const [imgIndex, setImgIndex] = useState(0);
+  const [imgIndex, setImgIndex] = useState(0);
   const { comments } = useCommentContext();
   function hendleClick() {
     dispatch({ type: "setSinglePost", payload: null });
@@ -23,13 +22,13 @@ export default function SinglePost() {
     backgroundSize: `cover`,
     backgroundRepeat: "no-repeat",
   };
-  /* const PostImgURL =
+  const PostImgURL =
     Array.from(singlePost.postUrls).length === 0
       ? noPostImg
       : singlePost.postUrls[imgIndex];
   const imgPostStyles = {
     backgroundImage: "url(" + PostImgURL + ")",
-    // backgroundPosition: "center",
+    backgroundPosition: "center",
     backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
   };
@@ -45,7 +44,7 @@ export default function SinglePost() {
       }
       setImgIndex((prev) => ++prev);
     }
-  }*/
+  }
   return (
     <div className={SinglePostCss.container}>
       <button
@@ -54,7 +53,7 @@ export default function SinglePost() {
           hendleClick();
         }}
       >
-        {"<--"}
+        CANCEL
       </button>
 
       <div className={SinglePostCss.postContainer}>
@@ -63,31 +62,12 @@ export default function SinglePost() {
           {singlePost.userName && (
             <div className={SinglePostCss.userName}>{singlePost.userName}</div>
           )}
-        </div>
-        {singlePost && (
-          <div className={SinglePostCss.title}>{singlePost.title}</div>
-        )}
-
-        <div className={SinglePostCss.allInfos}>
-          {singlePost.subject && (
-            <div className={SinglePostCss.info}>{singlePost.subject}</div>
-          )}
-          {singlePost.jobType && (
-            <div className={SinglePostCss.info}>{singlePost.jobType}</div>
-          )}
-
-          {singlePost.price && (
-            <div className={SinglePostCss.info}>{singlePost.price} KM</div>
+          {singlePost && (
+            <div className={SinglePostCss.title}>{singlePost.title}</div>
           )}
         </div>
-        {singlePost.description && (
-          <div className={SinglePostCss.description}>
-            {/* <p>DESCRIPTION</p> */}
-            {singlePost.description}
-          </div>
-        )}
         <div className={SinglePostCss.postImgContainer}>
-          {/* {!singlePost ? null : Array.from(singlePost.postImgs).length ===
+          {!singlePost ? null : Array.from(singlePost.postImgs).length ===
             0 ? null : (
             <button
               className={SinglePostCss.postImgButton}
@@ -97,32 +77,9 @@ export default function SinglePost() {
             >
               &#8810;
             </button>
-          )} */}
-          {/* listanje slika */}
-          {!singlePost
-            ? null
-            : Array.from(singlePost.postImgs).length === 0
-            ? null
-            : singlePost.postUrls.map((postUrl, index) => {
-                const imgStyle = {
-                  backgroundImage: "url(" + postUrl + ")",
-                  // backgroundPosition: "center",
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                };
+          )}
+          <div className={SinglePostCss.postImgs} style={imgPostStyles}></div>
 
-                return (
-                  <div
-                    className={SinglePostCss.postImgs}
-                    style={imgStyle}
-                    key={index}
-                  />
-                );
-              })}
-
-          {/* ************** */}
-          {/* <div className={SinglePostCss.postImgs} style={imgPostStyles}></div> */}
-          {/* 
           {!singlePost ? null : Array.from(singlePost.postImgs).length ===
             0 ? null : (
             <button
@@ -133,24 +90,31 @@ export default function SinglePost() {
             >
               &#8811;
             </button>
-          )} */}
+          )}
         </div>
-
-        {/* Rate */}
-        {singlePost.rate && (
-          <div className={SinglePostCss.rateContainer}>
-            {parseInt(singlePost.rate)}{" "}
-            <div className={SinglePostCss.rateIndex}>
-              {singlePost.rate - parseInt(singlePost.rate) === 0
-                ? null
-                : (singlePost.rate - parseInt(singlePost.rate))
-                    .toFixed(2)
-                    .toString()
-                    .slice(2)}
-            </div>
+        {singlePost.subject && (
+          <div className={SinglePostCss.subject}>
+            Subject: {singlePost.subject}
           </div>
         )}
-        {/* <DatePost date={singlePost.date} /> */}
+        {singlePost.jobType && (
+          <div className={SinglePostCss.jobType}>
+            Job-Type: {singlePost.jobType}
+          </div>
+        )}
+        {singlePost.description && (
+          <div className={SinglePostCss.description}>
+            <p>DESCRIPTION</p>
+            {singlePost.description}
+          </div>
+        )}
+        {singlePost.price && (
+          <div className={SinglePostCss.price}>
+            Price: {singlePost.price} KM
+          </div>
+        )}
+        {singlePost.rate && <div>{singlePost.rate}</div>}
+        <DatePost date={singlePost.date} />
       </div>
       <InputCommnet />
       <div className={SinglePostCss.commentsCont}>

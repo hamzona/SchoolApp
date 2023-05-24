@@ -61,7 +61,6 @@ const filterPosts = async (req, res, next) => {
         _id: 0,
         password: 0,
       });
-      if (!userData) return post;
       const postWuser = { ...post._doc, ...userData._doc };
       return postWuser;
     })

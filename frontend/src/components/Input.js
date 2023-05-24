@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-//import { usePostContext } from "../hooks/usePostContext";
+import { usePostContext } from "../hooks/usePostContext";
 import { useProfilPostsContext } from "../hooks/useProfilPostsContext";
 import { Link, useNavigate } from "react-router-dom";
-import InputCss from "../styles/inputStyle.module.css";
+import InputCss from "../styles/input.module.css";
 
 export default function Input() {
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
   const { state } = useAuthContext();
-  //  const { dispatch: updatePosts } = usePostContext();
+  const { dispatch: updatePosts } = usePostContext();
   const { dispatch: updateMyPosts } = useProfilPostsContext();
 
   const [images, setImages] = useState([]);
-  const [readableImages, setReadableImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState([]);
   const navigate = useNavigate();
-  console.log(data);
+
   const subjectsConst = [
     "matematika",
     "biologija",
@@ -83,17 +83,9 @@ export default function Input() {
   function hendleChange(e) {
     let copy = data;
     copy[e.target.id] = e.target.value;
-    setData({ ...copy });
-    console.log(data);
+    setData(copy);
   }
 
-  function hendleJobTypeChange(e) {
-    console.log(e.target.checked);
-    let copy = data;
-    copy[e.target.id] = e.target.checked ? e.target.value : undefined;
-    setData({ ...copy });
-    console.log(data);
-  }
   function imageChange(e) {
     setImages(e.target.files);
 
@@ -106,25 +98,17 @@ export default function Input() {
       reader.onload = () => {
         selectedFilesCopy.push(reader.result);
         if (selectedFilesCopy.length === files.length) {
-          setReadableImages(selectedFilesCopy);
+          setSelectedImages(selectedFilesCopy);
         }
       };
     }
   }
-
-  /*DATA TYPES */
-
-  const dataTypes = [
-    "Questions",
-    "Finished tasks",
-    "Instruction offers",
-    "Instruction needs",
-  ];
   return (
     <div className={InputCss.container}>
       <Link className={InputCss.back} to="/profil">
-        {"<--"}
+        Cancle
       </Link>
+      <div className={InputCss.title}>Upload post</div>
 
       <form
         className={InputCss.form}
@@ -132,15 +116,13 @@ export default function Input() {
           hendleSubmit(e);
         }}
       >
-        <div className={InputCss.title}>Upload post</div>
-        {/* TITLE */}
-        <div className={InputCss.inputContainerTitle}>
+        <div className={InputCss.inputContainer}>
           <label className={InputCss.label} htmlFor="title">
-            Title
+            Title:*{" "}
           </label>
           <input
             max={20}
-            className={InputCss.inputTitle}
+            className={InputCss.input}
             type="text"
             id="title"
             value={data.title}
@@ -149,61 +131,9 @@ export default function Input() {
             }}
           />
         </div>
-        {/* JOB TYPE */}
-        <div className={InputCss.dataTypeCont}>
-          <label htmlFor="dataType" className={InputCss.label}>
-            Data-type
-          </label>
-          {dataTypes.map((type, index) => {
-            return (
-              <div key={index} className={InputCss.dataTypeHelpCont}>
-                <input
-                  type="checkbox"
-                  id="dataType"
-                  checked={type === data.dataType}
-                  className={InputCss.dataTypeOption}
-                  onChange={(e) => {
-                    hendleJobTypeChange(e);
-                  }}
-                  value={type}
-                />
-                <label>{type}</label>
-              </div>
-            );
-          })}
-        </div>
-        {/* IMAGES */}
-        <div className={InputCss.inputImageContainer}>
-          <label htmlFor="images" className={InputCss.label}>
-            Import image
-          </label>
-          <input
-            multiple={true}
-            type="file"
-            onChange={(e) => {
-              imageChange(e);
-            }}
-          />
-        </div>
-        <div className={InputCss.selectedImagesContainer}>
-          {readableImages.map((image, index) => {
-            return (
-              <div
-                key={index}
-                className={InputCss.selectedImage}
-                style={{
-                  backgroundImage: "url(" + image + ")",
-                  backgroundSize: `contain`,
-                  backgroundRepeat: "no-repeat",
-                }}
-              ></div>
-            );
-          })}
-        </div>
-        {/* DESCRIPTION */}
-        <div className={InputCss.inputContainerDescription}>
+        <div className={InputCss.inputContainer}>
           <label className={InputCss.label} htmlFor="description">
-            Description
+            Description:
           </label>
           <textarea
             className={InputCss.inputDescription}
@@ -214,63 +144,99 @@ export default function Input() {
               hendleChange(e);
             }}
           />
-        </div>{" "}
-        {/* SUBJECTS */}
+        </div>
+        <div className={InputCss.inputContainer}>
+          <label className={InputCss.label} htmlFor="price">
+            Price:{" "}
+          </label>
+          <div className={InputCss.priceValuteCont}>
+            <input
+              className={InputCss.inputPrice}
+              type="number"
+              id="price"
+              min={0}
+              max={1000}
+              value={data.price}
+              onChange={(e) => {
+                hendleChange(e);
+              }}
+            />
+            KM
+          </div>
+        </div>
+
         <div className={InputCss.subjectCont}>
           <label htmlFor="subject" className={InputCss.label}>
-            Subject
+            Subject:{" "}
           </label>
           <select
-            className={InputCss.selectSubject}
+            className={InputCss.select}
             id="subject"
             value={data.subject}
             onChange={(e) => {
               hendleChange(e);
             }}
           >
-            <option className={InputCss.optionSubject} value={undefined}>
-              unchecked
-            </option>
+            <option value={undefined}>unchecked</option>
             {subjectsConst.map((subject, index) => {
               return (
-                <option
-                  className={InputCss.optionSubject}
-                  value={subject}
-                  key={index}
-                >
+                <option value={subject} key={index}>
                   {subject}
                 </option>
               );
             })}
           </select>
         </div>
-        {/* PRICE */}
-        {data.dataType === "Finished tasks" ? null : (
-          <div className={InputCss.inputContainerPrice}>
-            <label className={InputCss.label} htmlFor="price">
-              Price
-            </label>
-            <div className={InputCss.priceValuteCont}>
-              <input
-                className={InputCss.inputPrice}
-                type="number"
-                id="price"
-                min={0}
-                max={1000}
-                value={data.price}
-                onChange={(e) => {
-                  hendleChange(e);
-                }}
-              />
-              KM
-            </div>
-          </div>
-        )}
-        <div className={InputCss.buttonSubmitContainer}>
-          <button className={InputCss.buttonSubmit} type="submit">
-            submit
-          </button>
+
+        <div className={InputCss.jobTypeCont}>
+          <label htmlFor="jobType" className={InputCss.label}>
+            Job-type:{" "}
+          </label>
+          <select
+            className={InputCss.select}
+            id="jobType"
+            value={data.jobType}
+            onChange={(e) => hendleChange(e)}
+            defaultValue={undefined}
+          >
+            <option value={undefined}>unchecked</option>
+            <option value="homework">homework</option>
+            <option value="instruction">instruction</option>
+          </select>
         </div>
+
+        <div>
+          <label htmlFor="images" className={InputCss.label}>
+            Images:
+          </label>
+          <input
+            multiple={true}
+            type="file"
+            onChange={(e) => {
+              imageChange(e);
+            }}
+          />
+        </div>
+
+        <div className={InputCss.selectedImagesContainer}>
+          {selectedImages.map((image, index) => {
+            return (
+              <div
+                key={index}
+                className={InputCss.selectedImage}
+                style={{
+                  backgroundImage: "url(" + image + ")",
+                  backgroundPosition: "center",
+                  backgroundSize: `contain`,
+                  backgroundRepeat: "no-repeat",
+                }}
+              ></div>
+            );
+          })}
+        </div>
+        <button className={InputCss.button} type="submit">
+          submit
+        </button>
         {error && <div className={InputCss.error}>{error}</div>}
       </form>
     </div>

@@ -7,7 +7,6 @@ const {
   deleteImg,
   uploadMultiple,
   saveMultipleFileNames,
-  saveMultipleImagesNamesComment,
 } = require("../controllers/imgController");
 const auth = require("../middleware/authJwtMiddleware");
 route.post("/post/:name", auth, deleteImg, uploadSingle, saveFileName);
@@ -18,15 +17,6 @@ route.post(
   auth,
   uploadMultiple,
   saveMultipleFileNames,
-  (req, res) => {
-    res.json(req.files);
-  }
-);
-route.post(
-  "/postMultipleCommentImgs/:commentId",
-  auth,
-  uploadMultiple,
-  saveMultipleImagesNamesComment,
   (req, res) => {
     res.json(req.files);
   }

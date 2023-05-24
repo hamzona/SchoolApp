@@ -18,12 +18,11 @@ export function CommentContextProvider({ children }) {
   const [comments, dispatch] = useReducer(updateReducer, []);
   const { singlePost } = useSinglePostContext();
   const [loadingComments, setLoadingComments] = useState(false);
-  console.log(comments);
   useEffect(() => {
     if (singlePost === null) return;
     async function getData() {
       setLoadingComments(true);
-      const res = await fetch(" http://localhost:4000/api/comments/all", {
+      const res = await fetch(" http://localhost:4000/api/comments/all    ", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +30,7 @@ export function CommentContextProvider({ children }) {
         body: JSON.stringify({ postId: singlePost._id }),
       });
       const json = await res.json();
-      const commentsWithProfilImg = await Promise.all(
+      const commentsWithImg = await Promise.all(
         json.map(async (comment) => {
           if (!comment.imgName) return comment;
 
@@ -46,31 +45,8 @@ export function CommentContextProvider({ children }) {
           return imageObj;
         })
       );
-
-      const commentsWithContentImages = await Promise.all(
-        commentsWithProfilImg.map(async (comment) => {
-          if (comment.commentImgsNames.lenght === 0) {
-            const imageObj = { imgContentURLS: [], ...comment };
-            return imageObj;
-          }
-          const images = await Promise.all(
-            comment.commentImgsNames.map(async (imgName) => {
-              const img = await fetch(
-                `http://localhost:4000/api/img/getImgPublic/${imgName}`
-              );
-
-              const blob = await img.blob();
-              const imgURL = URL.createObjectURL(blob);
-              return imgURL;
-            })
-          );
-
-          return { ...comment, imgContentURLS: images };
-        })
-      );
-
       if (res.ok) {
-        dispatch({ type: "setComments", payload: commentsWithContentImages });
+        dispatch({ type: "setComments", payload: commentsWithImg });
         setLoadingComments(false);
       }
     }

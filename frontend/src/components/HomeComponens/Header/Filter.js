@@ -50,6 +50,7 @@ export default function Filter({ setIsFilterOpen }) {
       <div
         className={FilterCss.cancle}
         onClick={() => {
+          console.log("radi");
           setIsFilterOpen(false);
         }}
       >
