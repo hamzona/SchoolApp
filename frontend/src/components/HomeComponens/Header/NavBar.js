@@ -15,8 +15,8 @@ export default function NavBar() {
     setSubjects,
     setMinPrice,
     setMaxPrice,
-    setJobType,
-    jobType,
+    setDataType,
+    dataType,
     subjects,
     minPrice,
     maxPrice,
@@ -39,7 +39,7 @@ export default function NavBar() {
     setSubjects([]);
     setMinPrice(null);
     setMaxPrice(null);
-    setJobType(null);
+    setDataType(null);
   }
 
   function isFiltered() {
@@ -115,17 +115,17 @@ export default function NavBar() {
 
       <div className={NavBarCss.dataTypeContainer}>
         {dataTypes.map((type, index) => {
-          const typeStyle = { background: type === jobType ? " #C89000" : "" };
+          const typeStyle = { background: type === dataType ? " #C89000" : "" };
           return (
             <div
               key={index}
               className={NavBarCss.dataTypeOption}
               style={typeStyle}
               onClick={() => {
-                if (type === jobType) {
-                  return setJobType(null);
+                if (type === dataType) {
+                  return setDataType(null);
                 }
-                setJobType(type);
+                setDataType(type);
               }}
             >
               {type}
