@@ -38,7 +38,6 @@ const singup = async (req, res) => {
       email: email,
       password: hash,
       name: name,
-      rate: 0,
     });
     const token = await createToken(newUser._id);
 

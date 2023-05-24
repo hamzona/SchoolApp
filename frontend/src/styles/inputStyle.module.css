@@ -1,0 +1,125 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.back {
+  font-size: clamp(1rem, 2vw, 2rem);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: solid 2px black;
+  text-decoration: none;
+  color: black;
+  padding: 0.5vw 1vw;
+}
+.form {
+  width: 70%;
+  min-height: 50vh;
+  font-size: clamp(1.2rem, 2vw, 3rem);
+  background-color: gray;
+  margin: 20vh 0;
+}
+.title {
+  font-size: clamp(1.2rem, 3vw, 3rem);
+  padding: 2vw 4vw;
+}
+.dataTypeOption {
+  height: 1vw;
+  width: 1vw;
+}
+.dataTypeCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding: 2vw 4vw;
+}
+.dataTypeHelpCont {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.inputContainerTitle {
+  display: flex;
+  flex-direction: column;
+  padding: 2vw 4vw;
+}
+.inputTitle {
+  height: 8vh;
+  width: 20vw;
+  font-size: clamp(1rem, 1.4vw, 2rem);
+}
+
+.selectedImage {
+  min-height: 30vh;
+}
+.selectedImagesContainer {
+  padding: 0 4vw;
+}
+
+.inputImageContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 4vw;
+}
+.selectedImage {
+  margin: 5vh 0;
+}
+.inputContainerDescription {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 2vw 4vw;
+}
+
+.inputDescription {
+  resize: none;
+  width: 30vw;
+  height: 40vh;
+  font-size: clamp(1rem, 1vw, 2rem);
+}
+.inputContainerPrice {
+  display: flex;
+  flex-direction: column;
+  padding: 2vw 4vw;
+}
+.inputPrice {
+  font-size: clamp(1rem, 1.4vw, 2rem);
+  margin-right: 1vw;
+}
+
+.inputPrice::-webkit-outer-spin-button,
+.inputPrice::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.priceValuteCont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.subjectCont {
+  display: flex;
+  padding: 2vw 4vw;
+}
+.selectSubject {
+  font-size: clamp(1rem, 1.4vw, 2rem);
+  text-align: center;
+  margin-left: 2vw;
+}
+.optionSubject {
+  font-size: clamp(1rem, 1.4vw, 2rem);
+}
+.buttonSubmitContainer {
+  display: flex;
+  justify-content: right;
+  padding: 2vw 4vw;
+}
+.buttonSubmit {
+  font-size: clamp(1rem, 1.4vw, 2rem);
+  padding: 0.5vw;
+  border-radius: 5px;
+}

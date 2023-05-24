@@ -1,7 +1,7 @@
 const Post = require("../models/postModel");
 const User = require("../models/authModel");
 const addPost = async (req, res) => {
-  const { title, price, description, subject, jobType } = req.body;
+  const { title, price, description, subject, dataType } = req.body;
 
   try {
     if (!title) {
@@ -13,9 +13,9 @@ const addPost = async (req, res) => {
       description: description,
       price: price,
       subject: subject,
-      jobType: jobType,
+      dataType: dataType,
       userId: req.user,
-      rate: 0,
+      likes: 0,
       date: new Date(),
     });
 
