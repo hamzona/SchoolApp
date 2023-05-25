@@ -118,6 +118,7 @@ body {
 .deleteButton {
   color: red;
   font-size: clamp(1rem, 2vw, 2rem);
+  text-align: end;
 }
 .deletePostButtonShow {
   position: absolute;
