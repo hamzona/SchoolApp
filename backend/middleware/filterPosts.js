@@ -5,8 +5,8 @@ const filterPosts = async (req, res, next) => {
   const { sortBy } = req.query;
 
   let sortOpition = {};
-  if (sortBy === "rate") {
-    sortOpition = { rate: -1 };
+  if (sortBy === "likes") {
+    sortOpition = { likes: -1 };
   } else if (sortBy === "date") {
     sortOpition = { date: -1 };
   }

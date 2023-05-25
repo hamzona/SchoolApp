@@ -8,13 +8,11 @@ export default function Like() {
   const { state } = useAuthContext();
   const { singlePost } = useSinglePostContext();
   const { state: posts, dispatch } = usePostContext();
-  console.log(singlePost.likes);
 
   const [liked, setLiked] = useState(
     singlePost.likes.includes(state.user.name)
   );
   const [likes, setLikes] = useState(singlePost.likes.length);
-  console.log(liked);
   async function hendleLike() {
     const res = await fetch(
       `http://localhost:4000/api/posts/like/${singlePost._id}`,

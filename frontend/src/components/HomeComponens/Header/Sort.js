@@ -20,7 +20,7 @@ export default function Sort() {
         }}
       >
         <option value={undefined}>unchecked</option>
-        <option value={"rate"}>best rate</option>
+        <option value={"likes"}>likes</option>
         <option value={"date"}>newest</option>
       </select>
     </div>
