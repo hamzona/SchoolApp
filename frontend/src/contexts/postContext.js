@@ -3,7 +3,7 @@ import { createContext, useEffect, useReducer, useState } from "react";
 export const PostContext = createContext();
 
 function updateReducer(state, action) {
-  console.log(action.payload._id);
+  console.log(action.payload.likes);
   switch (action.type) {
     case "setPosts":
       return action.payload;
@@ -14,7 +14,9 @@ function updateReducer(state, action) {
     case "like":
       return state.map((item) => {
         if (item._id === action.payload._id) {
-          return action.payload;
+          item.likes = action.payload.likes;
+          console.log(item);
+          return item;
         }
         return item;
       });
