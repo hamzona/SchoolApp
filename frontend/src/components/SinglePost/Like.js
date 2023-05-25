@@ -7,7 +7,7 @@ import SinglePostCss from "../../styles/singlePostStil.module.css";
 export default function Like() {
   const { state } = useAuthContext();
   const { singlePost } = useSinglePostContext();
-  const { state: posts, dispatch } = usePostContext();
+  const { dispatch } = usePostContext();
 
   const [liked, setLiked] = useState(
     singlePost.likes.includes(state.user.name)

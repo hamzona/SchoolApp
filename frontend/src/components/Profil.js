@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import ProfilCss from "../styles/profil.module.css";
@@ -6,8 +6,12 @@ import noUserImg from "../img/user-icon-linear-user-icon-gray-background-1066033
 import HomePosts from "./HomeComponens/HomePosts";
 import Loading from "./animation/Loading";
 import { useProfilPostsContext } from "../hooks/useProfilPostsContext";
+import DeleteButton from "./HomeComponens/DeleteButton";
 export default function Profil() {
   const { state, dispatch, imgUrl } = useAuthContext();
+
+  /*DELETE BUTTONS SHOW */
+  const [isShowDeleteButton, setIsShowDeleteButton] = useState(false);
   //  const { state: postsState, isLoadingPosts } = usePostContext();
   const {
     state: profilPosts,
@@ -28,7 +32,7 @@ export default function Profil() {
     backgroundSize: `cover`,
     backgroundRepeat: "no-repeat",
   };
-
+  console.log(profilPosts);
   return (
     <div className={ProfilCss.container}>
       <Link
@@ -40,7 +44,6 @@ export default function Profil() {
       >
         {"<--"}
       </Link>
-
       <div className={ProfilCss.profilContainer}>
         <div className={ProfilCss.imgContainer}>
           <div className={ProfilCss.profilImg} style={imgStyles} />
@@ -68,6 +71,15 @@ export default function Profil() {
         <Link className={ProfilCss.inputLink} to="/input">
           Upload new post
         </Link>
+
+        {!profilPosts ? null : profilPosts.length !== 0 ? (
+          <div
+            className={ProfilCss.deletePostButtonShow}
+            onClick={() => setIsShowDeleteButton((prev) => !prev)}
+          >
+            Delete post
+          </div>
+        ) : null}
       </div>
 
       {/* <div className={ProfilCss.titleMyPosts}>My posts:</div> */}
@@ -76,8 +88,18 @@ export default function Profil() {
           <Loading />
         ) : (
           profilPosts &&
-          profilPosts.map((item) => {
-            return <HomePosts key={item._id} item={item} />;
+          profilPosts.map((item, index) => {
+            return (
+              <div key={index}>
+                {isShowDeleteButton ? (
+                  <DeleteButton
+                    ID={item._id}
+                    setIsShowDeleteButton={setIsShowDeleteButton}
+                  />
+                ) : null}
+                <HomePosts key={item._id} item={item} />;
+              </div>
+            );
           })
         )}
       </div>
