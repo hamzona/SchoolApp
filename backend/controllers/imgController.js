@@ -104,12 +104,12 @@ const MongoClient = require("mongodb").MongoClient;
 const mongoClient = new MongoClient(process.env.MONGO_URL);
 
 const deleteImg = async (req, res, next) => {
+  console.log(req.params.name);
   try {
     if (!req.params.name || req.params.name === "undefined") {
-      return next();
+      return res.json({ p: "nesto ne valja" });
     }
     await mongoClient.connect();
-
     const database = mongoClient.db("test");
     const bucket = new GridFSBucket(database, {
       bucketName: "uploadsImages",
@@ -118,13 +118,40 @@ const deleteImg = async (req, res, next) => {
     const file = await database
       .collection("uploadsImages.files")
       .findOne({ filename: req.params.name });
+
     bucket.delete(file._id);
+    console.log(file);
+    req.file = file;
     next();
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
 };
+const deleteImgFromPostsAndComments = async (req, res, next) => {
+  console.log(req.params.name);
+  try {
+    if (!req.params.name || req.params.name === "undefined") {
+      return res.json({ p: "nesto ne valja" });
+    }
+    await mongoClient.connect();
+    const database = mongoClient.db("test");
+    const bucket = new GridFSBucket(database, {
+      bucketName: "uploadsImages",
+    });
 
+    const file = await database
+      .collection("uploadsImages.files")
+      .findOne({ filename: req.params.name });
+
+    bucket.delete(file._id);
+    console.log(file);
+    req.file = file;
+    const js = JSON.stringify(file);
+    res.json(file);
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
 const getImg = async (req, res) => {
   try {
     await mongoClient.connect();
@@ -188,6 +215,22 @@ const getImgs = async (req, res) => {
   }
 };
 */
+/*
+const deleteAllCommentsImagesFormPost = async (req, res) => {
+const postId=req.params
+try{
+  const comments=await Comment.find({postId:postId})
+
+  const imgNames=comments.map(comment=>{
+    return comment.im
+  })
+}catch (error) {
+    return res.status(500).send({
+      message: error.message,
+    });
+  }
+
+};*/
 module.exports = {
   uploadMultiple,
   uploadSingle,
@@ -195,7 +238,7 @@ module.exports = {
   getImg,
 
   deleteImg,
-
+  deleteImgFromPostsAndComments,
   saveMultipleFileNames,
   saveMultipleImagesNamesComment,
 };

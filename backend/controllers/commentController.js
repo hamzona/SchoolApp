@@ -52,11 +52,40 @@ const deleteComment = async (req, res) => {
     res.status(400).json({ error: e.message });
   }
 };
+const deleteAllCommentsFromPost = async (req, res) => {
+  const { postId } = req.params;
+  console.log(postId);
+  try {
+    const deletedComments = await Comment.deleteMany({ postId: postId });
+    res.json(deletedComments);
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+const getAllCommentImgNamesFromPost = async (req, res) => {
+  const { postId } = req.params;
+  //console.log(postId);
+  try {
+    const comments = await Comment.find({ postId: postId });
 
+    let imgNames = [];
+    comments.forEach((comment) => {
+      imgNames.push(...comment.commentImgsNames);
+    });
+    //  console.log({ imgNames });
+    res.json(imgNames);
+  } catch (error) {
+    res.status(400).send({
+      message: error.message,
+    });
+  }
+};
 module.exports = {
   postComment,
   getComments,
-  deleteComment /*
+  deleteComment,
+  deleteAllCommentsFromPost,
+  getAllCommentImgNamesFromPost /*
   updatePost,
   updateUser,*/,
 };

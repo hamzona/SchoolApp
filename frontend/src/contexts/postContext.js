@@ -3,7 +3,6 @@ import { createContext, useEffect, useReducer, useState } from "react";
 export const PostContext = createContext();
 
 function updateReducer(state, action) {
-  console.log(action.payload.likes);
   switch (action.type) {
     case "setPosts":
       return action.payload;
@@ -32,7 +31,7 @@ export function PostContextProvider({ children }) {
   /*search */
   const [search, setSearch] = useState(null);
   /*filters */
-  const [subjects, setSubjects] = useState([]);
+  const [subjects, setSubjects] = useState(null);
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
   const [dataType, setDataType] = useState(null);
@@ -44,10 +43,11 @@ export function PostContextProvider({ children }) {
   // const [user, setUser] = useState(null);
   // console.log(user);
   /*Loading */
+  console.log(state);
   const [isLoadingPosts, setIsLoadingPosts] = useState(false);
   useEffect(() => {
     let params = new URLSearchParams(
-      `page=${page}&limit=20&search=${search}&min=${minPrice}&max=${maxPrice}&dataType=${dataType}&sortBy=${sortBy}`
+      `page=${page}&limit=20&search=${search}&min=${minPrice}&max=${maxPrice}&dataType=${dataType}&sortBy=${sortBy}&subjects=${subjects}`
     );
     if (!dataType) {
       params.delete("dataType");
@@ -61,10 +61,12 @@ export function PostContextProvider({ children }) {
     if (!maxPrice) {
       params.delete("max");
     }
-
-    subjects.forEach((subject) => {
-      params.append("subject", subject);
-    });
+    if (!subjects) {
+      params.delete("subjects");
+    }
+    // subjects.forEach((subject) => {
+    //   params.append("subject", subject);
+    // });
 
     const getAllPosts = async () => {
       setIsLoadingPosts(true);

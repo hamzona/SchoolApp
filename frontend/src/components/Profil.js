@@ -32,7 +32,7 @@ export default function Profil() {
     backgroundSize: `cover`,
     backgroundRepeat: "no-repeat",
   };
-  console.log(profilPosts);
+  //console.log(profilPosts);
   return (
     <div className={ProfilCss.container}>
       <Link
@@ -89,11 +89,13 @@ export default function Profil() {
         ) : (
           profilPosts &&
           profilPosts.map((item, index) => {
+            //console.log(item);
             return (
               <div key={index}>
                 {isShowDeleteButton ? (
                   <DeleteButton
                     ID={item._id}
+                    imgNames={item.postImgs}
                     setIsShowDeleteButton={setIsShowDeleteButton}
                   />
                 ) : null}
