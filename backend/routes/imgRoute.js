@@ -8,11 +8,14 @@ const {
   uploadMultiple,
   saveMultipleFileNames,
   saveMultipleImagesNamesComment,
+  deleteImgFromPostsAndComments,
 } = require("../controllers/imgController");
 const auth = require("../middleware/authJwtMiddleware");
 route.post("/post/:name", auth, deleteImg, uploadSingle, saveFileName);
 route.get("/getImg/:name", auth, getImg);
 route.get("/getImgPublic/:name", getImg);
+
+route.get("/deleteImg/:name", deleteImgFromPostsAndComments);
 route.post(
   "/postMultiple/:postId",
   auth,

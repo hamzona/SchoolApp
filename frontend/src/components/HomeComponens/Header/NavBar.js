@@ -43,7 +43,7 @@ export default function NavBar() {
   }
 
   function isFiltered() {
-    if (subjects.length !== 0 || minPrice !== null || maxPrice !== null) {
+    if (subjects !== null || minPrice !== null || maxPrice !== null) {
       return true;
     }
     return false;

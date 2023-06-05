@@ -6,7 +6,6 @@ export default function Filter({ setIsFilterOpen }) {
   const [filterSubject, setFilterSubject] = useState([]);
   const [minPriceF, setMinPriceF] = useState("");
   const [maxPriceF, setMaxPriceF] = useState("");
-  const [jobTypeF, setJobTypeF] = useState("");
   const subjectsConst = [
     "matematika",
     "biologija",
@@ -17,17 +16,17 @@ export default function Filter({ setIsFilterOpen }) {
     "muzicki",
     "informatika",
   ];
-  function hendldeChange(e) {
-    let copy = filterSubject;
-    const checked = e.target.checked;
-    const value = e.target.value;
-    if (checked) {
-      copy = [...filterSubject, value];
-    } else {
-      copy = copy.filter((item) => item !== value);
-    }
-    setFilterSubject(copy);
-  }
+  // function hendldeChange(e) {
+  //   let copy = filterSubject;
+  //   const checked = e.target.checked;
+  //   const value = e.target.value;
+  //   if (checked) {
+  //     copy = [...filterSubject, value];
+  //   } else {
+  //     copy = copy.filter((item) => item !== value);
+  //   }
+  //   setFilterSubject(copy);
+  // }
   function hendleClick() {
     setSubjects(filterSubject);
     setMinPrice(minPriceF);
@@ -40,9 +39,8 @@ export default function Filter({ setIsFilterOpen }) {
     setFilterSubject([]);
     setMinPriceF("");
     setMaxPriceF("");
-    setJobTypeF("");
   }
-
+  console.log(filterSubject);
   return (
     <div className={FilterCss.shadowSpace}>
       <div
@@ -57,22 +55,32 @@ export default function Filter({ setIsFilterOpen }) {
         {
           <div>
             <div className={FilterCss.titles}> Subjects: </div>
-            {subjectsConst.map((subject, index) => {
-              return (
-                <div className={FilterCss.subject} key={index}>
-                  {subject}
-                  <input
-                    className={FilterCss.checkboxSubject}
-                    type="checkbox"
-                    value={subject}
-                    checked={filterSubject.includes(subject)}
-                    onChange={(e) => {
-                      hendldeChange(e);
-                    }}
-                  />
-                </div>
-              );
-            })}
+            <select
+              onChange={(e) => {
+                setFilterSubject(e.target.value);
+              }}
+            >
+              <option className={FilterCss.subject} value={null}>
+                unchecked
+              </option>
+              ;
+              {subjectsConst.map((subject, index) => {
+                return (
+                  <option className={FilterCss.subject} key={index}>
+                    {subject}
+                    {/* <input
+                      className={FilterCss.checkboxSubject}
+                      type="checkbox"
+                      value={subject}
+                      //checked={filterSubject.includes(subject)}
+                      onChange={(e) => {
+                        hendldeChange(e);
+                      }}
+                    /> */}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         }
         <div>
@@ -106,20 +114,7 @@ export default function Filter({ setIsFilterOpen }) {
             />
           </div>
         </div>
-        <div>
-          <div className={FilterCss.titles}>Type of work</div>
-          <select
-            value={jobTypeF}
-            onChange={(e) => {
-              setJobTypeF(e.target.value);
-            }}
-          >
-            <option value="">unchecked</option>
-            <option value="homework">homework</option>
-            <option value="instruction">instruction</option>
-            unchecked
-          </select>
-        </div>
+
         <div className={FilterCss.buttonsContainer}>
           <button className={FilterCss.apply} onClick={() => hendleClick()}>
             Apply
