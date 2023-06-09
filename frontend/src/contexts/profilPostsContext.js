@@ -8,7 +8,7 @@ function updateReducer(state, action) {
       return [action.payload, ...state];
     case "deleteMyPost":
       return state.filter((item) => item._id !== action.payload._id);
-    case "updateMyPost":
+    case "reload":
     default:
       return state;
   }

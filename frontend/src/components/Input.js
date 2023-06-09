@@ -9,11 +9,13 @@ export default function Input() {
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
   const { state } = useAuthContext();
+  console.log(state);
   //  const { dispatch: updatePosts } = usePostContext();
   const { dispatch: updateMyPosts } = useProfilPostsContext();
 
   const [images, setImages] = useState([]);
   const [readableImages, setReadableImages] = useState([]);
+  console.log(readableImages);
   const navigate = useNavigate();
   const subjectsConst = [
     "matematika",
@@ -68,7 +70,20 @@ export default function Input() {
       );
       var jsonWithImgs = await resWithImgs.json();
     }
+    if (readableImages.length !== 0) {
+      console.log(readableImages[0]);
+      jsonWithImgs.postUrls = [readableImages[0]];
+    }
 
+    if (res.ok) {
+      const img = await fetch(
+        `http://localhost:4000/api/img/getImgPublic/${state.user.imgName}`
+      );
+
+      const blob = await img.blob();
+      const imgURL = URL.createObjectURL(blob);
+      jsonWithImgs.imgURL = imgURL;
+    }
     if (res.ok) {
       updateMyPosts({ type: "addMyPost", payload: jsonWithImgs });
       setData("");
