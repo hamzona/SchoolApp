@@ -36,6 +36,7 @@ export default function HomePosts({ item }) {
     backgroundSize: `cover`,
     backgroundRepeat: "no-repeat",
   };
+  console.log(item);
   return (
     <div
       className={HomePostsCss.container}
@@ -52,8 +53,8 @@ export default function HomePosts({ item }) {
         <div className={HomePostsCss.userPostImg} style={imgStyles}></div>
         <div className={HomePostsCss.userName}>{item.userName}</div>
       </div>
-
       {!item.date ? null : <DatePost date={item.date} />}
+      <div className={HomePostsCss.likes}>Likes {item.likes.length}</div>
     </div>
   );
 }
