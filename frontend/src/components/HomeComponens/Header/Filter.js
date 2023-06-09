@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { usePostContext } from "../../../hooks/usePostContext";
-import FilterCss from "../../../styles/Home/Header/filter.module.css";
+import FilterCss from "../../../styles/Home/Header/filter2.module.css";
 export default function Filter({ setIsFilterOpen }) {
   const { setSubjects, setMinPrice, setMaxPrice, setPage } = usePostContext();
   const [filterSubject, setFilterSubject] = useState([]);
@@ -35,40 +35,30 @@ export default function Filter({ setIsFilterOpen }) {
     setIsFilterOpen(false);
   }
 
-  function resetAll() {
-    setFilterSubject([]);
-    setMinPriceF("");
-    setMaxPriceF("");
-  }
-  console.log(filterSubject);
+  // function resetAll() {
+  //   setFilterSubject([]);
+  //   setMinPriceF("");
+  //   setMaxPriceF("");
+  // }
   return (
-    <div className={FilterCss.shadowSpace}>
-      <div
-        className={FilterCss.cancle}
-        onClick={() => {
-          setIsFilterOpen(false);
-        }}
-      >
-        X
-      </div>
-      <div className={FilterCss.container}>
-        {
-          <div>
-            <div className={FilterCss.titles}> Subjects: </div>
-            <select
-              onChange={(e) => {
-                setFilterSubject(e.target.value);
-              }}
-            >
-              <option className={FilterCss.subject} value={null}>
-                unchecked
-              </option>
-              ;
-              {subjectsConst.map((subject, index) => {
-                return (
-                  <option className={FilterCss.subject} key={index}>
-                    {subject}
-                    {/* <input
+    <div className={FilterCss.container}>
+      {
+        <div>
+          <div className={FilterCss.titles}> Subjects: </div>
+          <select
+            onChange={(e) => {
+              setFilterSubject(e.target.value);
+            }}
+          >
+            <option className={FilterCss.subject} value={null}>
+              unchecked
+            </option>
+            ;
+            {subjectsConst.map((subject, index) => {
+              return (
+                <option className={FilterCss.subject} key={index}>
+                  {subject}
+                  {/* <input
                       className={FilterCss.checkboxSubject}
                       type="checkbox"
                       value={subject}
@@ -77,53 +67,49 @@ export default function Filter({ setIsFilterOpen }) {
                         hendldeChange(e);
                       }}
                     /> */}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        }
-        <div>
-          <div className={FilterCss.titles}>Price:</div>
-          <div className={FilterCss.PriceInputCont}>
-            <label className={FilterCss.labelPrice} htmlFor="min">
-              MIN:{" "}
-            </label>
-            <input
-              className={FilterCss.inputPrice}
-              type="number"
-              id="min"
-              value={minPriceF}
-              onChange={(e) => {
-                setMinPriceF(e.target.value);
-              }}
-            />
-          </div>
-          <div className={FilterCss.PriceInputCont}>
-            <label className={FilterCss.labelPrice} htmlFor="max">
-              MAX:{" "}
-            </label>
-            <input
-              className={FilterCss.inputPrice}
-              type="number"
-              id="max"
-              value={maxPriceF}
-              onChange={(e) => {
-                setMaxPriceF(e.target.value);
-              }}
-            />
-          </div>
+                </option>
+              );
+            })}
+          </select>
         </div>
+      }
+      <div>
+        <div className={FilterCss.titles}>Price:</div>
+        <div className={FilterCss.PriceInputCont}>
+          <label className={FilterCss.labelPrice} htmlFor="min">
+            MIN:{" "}
+          </label>
+          <input
+            className={FilterCss.inputPrice}
+            type="number"
+            id="min"
+            value={minPriceF}
+            onChange={(e) => {
+              setMinPriceF(e.target.value);
+            }}
+          />
+        </div>
+        <div className={FilterCss.PriceInputCont}>
+          <label className={FilterCss.labelPrice} htmlFor="max">
+            MAX:{" "}
+          </label>
+          <input
+            className={FilterCss.inputPrice}
+            type="number"
+            id="max"
+            value={maxPriceF}
+            onChange={(e) => {
+              setMaxPriceF(e.target.value);
+            }}
+          />
+        </div>
+      </div>
 
-        <div className={FilterCss.buttonsContainer}>
-          <button className={FilterCss.apply} onClick={() => hendleClick()}>
-            Apply
-          </button>
-          <button className={FilterCss.reset} onClick={() => resetAll()}>
-            Reset
-          </button>
-        </div>
-      </div>{" "}
+      <div className={FilterCss.buttonsContainer}>
+        <button className={FilterCss.apply} onClick={() => hendleClick()}>
+          Apply
+        </button>
+      </div>
     </div>
   );
 }

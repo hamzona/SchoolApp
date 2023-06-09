@@ -36,10 +36,10 @@ export default function NavBar() {
 
   function resetFilter() {
     setPage(1);
-    setSubjects([]);
+    setSubjects(null);
     setMinPrice(null);
     setMaxPrice(null);
-    setDataType(null);
+    //setDataType(null);
   }
 
   function isFiltered() {

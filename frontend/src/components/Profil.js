@@ -7,6 +7,7 @@ import HomePosts from "./HomeComponens/HomePosts";
 import Loading from "./animation/Loading";
 import { useProfilPostsContext } from "../hooks/useProfilPostsContext";
 import DeleteButton from "./HomeComponens/DeleteButton";
+import UploadingImg from "./UploadingImg";
 export default function Profil() {
   const { state, dispatch, imgUrl } = useAuthContext();
 
@@ -35,6 +36,7 @@ export default function Profil() {
   //console.log(profilPosts);
   return (
     <div className={ProfilCss.container}>
+      {}
       <Link
         onClick={() => {
           setUser(null);

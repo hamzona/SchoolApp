@@ -17,7 +17,7 @@ function updateReducer(state, action) {
 export function ProfilPostsContextProvider({ children }) {
   const [state, dispatch] = useReducer(updateReducer, null);
   const [user, setUser] = useState(null);
-
+  console.log(state);
   const [isLoadingProfilPosts, setLoadingProfilPosts] = useState(false);
   useEffect(() => {
     if (!user) {
