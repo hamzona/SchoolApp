@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSingup } from "../../hooks/useSingup";
-import SingupCSS from "../../styles/singup.module.css";
+import { useSingup } from "../hooks/useSingup";
+import SingupCSS from "../styles/singup.module.css";
 
 export function Singup() {
   const [email, setEmail] = useState("");

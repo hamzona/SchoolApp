@@ -6,6 +6,7 @@ const {
   getImgs,
   deleteImg,
   uploadMultiple,
+
   saveMultipleFileNames,
   saveMultipleImagesNamesComment,
   deleteImgFromPostsAndComments,

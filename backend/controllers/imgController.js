@@ -104,10 +104,9 @@ const MongoClient = require("mongodb").MongoClient;
 const mongoClient = new MongoClient(process.env.MONGO_URL);
 
 const deleteImg = async (req, res, next) => {
-  console.log(req.params.name);
   try {
     if (!req.params.name || req.params.name === "undefined") {
-      return res.json({ p: "nesto ne valja" });
+      return next();
     }
     await mongoClient.connect();
     const database = mongoClient.db("test");
@@ -120,7 +119,7 @@ const deleteImg = async (req, res, next) => {
       .findOne({ filename: req.params.name });
 
     bucket.delete(file._id);
-    console.log(file);
+    // console.log(file);
     req.file = file;
     next();
   } catch (e) {
@@ -128,7 +127,7 @@ const deleteImg = async (req, res, next) => {
   }
 };
 const deleteImgFromPostsAndComments = async (req, res, next) => {
-  console.log(req.params.name);
+  req.params.name;
   try {
     if (!req.params.name || req.params.name === "undefined") {
       return res.json({ p: "nesto ne valja" });
@@ -144,7 +143,6 @@ const deleteImgFromPostsAndComments = async (req, res, next) => {
       .findOne({ filename: req.params.name });
 
     bucket.delete(file._id);
-    console.log(file);
     req.file = file;
     const js = JSON.stringify(file);
     res.json(file);

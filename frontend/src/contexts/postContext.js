@@ -14,7 +14,6 @@ function updateReducer(state, action) {
       return state.map((item) => {
         if (item._id === action.payload._id) {
           item.likes = action.payload.likes;
-          console.log(item);
           return item;
         }
         return item;
@@ -43,7 +42,6 @@ export function PostContextProvider({ children }) {
   // const [user, setUser] = useState(null);
   // console.log(user);
   /*Loading */
-  console.log(state);
   const [isLoadingPosts, setIsLoadingPosts] = useState(false);
   useEffect(() => {
     let params = new URLSearchParams(

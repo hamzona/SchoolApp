@@ -35,6 +35,7 @@ export default function Profil() {
   //console.log(profilPosts);
   return (
     <div className={ProfilCss.container}>
+      {}
       <Link
         onClick={() => {
           setUser(null);
